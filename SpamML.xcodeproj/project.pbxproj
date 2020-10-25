@@ -15,9 +15,11 @@
 		B815888F2544DDEF009195A0 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B815888E2544DDEF009195A0 /* SafariServices.framework */; };
 		B81588912544DDFD009195A0 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B81588902544DDFD009195A0 /* AuthenticationServices.framework */; };
 		B81588932544DE06009195A0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B81588922544DE06009195A0 /* SystemConfiguration.framework */; };
-		B81588BE2544E114009195A0 /* GoogleSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81588BD2544E114009195A0 /* GoogleSignInController.swift */; };
+		B81588BE2544E114009195A0 /* GoogleSignInService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81588BD2544E114009195A0 /* GoogleSignInService.swift */; };
 		B81588EE2544E8E3009195A0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81588EC2544E8E3009195A0 /* LoginViewController.swift */; };
 		B81588F02544E8E3009195A0 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B81588ED2544E8E3009195A0 /* LoginViewController.xib */; };
+		B88201AD2545948B0011B1E1 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88201AC2545948B0011B1E1 /* Keychain.swift */; };
+		B88201B72546215F0011B1E1 /* GoogleUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88201B62546215F0011B1E1 /* GoogleUserInfo.swift */; };
 		B8FA7E702544EE9200EAD17E /* MailCore2 in Frameworks */ = {isa = PBXBuildFile; productRef = B8FA7E6F2544EE9200EAD17E /* MailCore2 */; };
 		B8FA7E862544FD2D00EAD17E /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B8FA7E852544FD2D00EAD17E /* Reachability */; };
 		B8FA7E94254507E900EAD17E /* OIDExternalUserAgentCatalyst.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FA7E8C254507E900EAD17E /* OIDExternalUserAgentCatalyst.m */; };
@@ -42,9 +44,11 @@
 		B81588962544DE1C009195A0 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
 		B81588982544DE20009195A0 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		B815889A2544DE28009195A0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		B81588BD2544E114009195A0 /* GoogleSignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInController.swift; sourceTree = "<group>"; };
+		B81588BD2544E114009195A0 /* GoogleSignInService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInService.swift; sourceTree = "<group>"; };
 		B81588EC2544E8E3009195A0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B81588ED2544E8E3009195A0 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		B88201AC2545948B0011B1E1 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		B88201B62546215F0011B1E1 /* GoogleUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleUserInfo.swift; sourceTree = "<group>"; };
 		B8FA7E732544EEA000EAD17E /* SpamML.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpamML.entitlements; sourceTree = "<group>"; };
 		B8FA7E7E2544F29A00EAD17E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8FA7E8A254507E800EAD17E /* SpamML-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpamML-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -100,9 +104,11 @@
 			children = (
 				B815883B25436101009195A0 /* SpamMLApp.swift */,
 				B81588CD2544E490009195A0 /* User Interface */,
-				B815883D25436102009195A0 /* Assets.xcassets */,
-				B81588BC2544E103009195A0 /* Controllers */,
+				B88201B32546213F0011B1E1 /* Models */,
+				B88201AF254620AA0011B1E1 /* API Services */,
+				B88201AB254594760011B1E1 /* Helpers & Extensions */,
 				B8FA7E88254507B000EAD17E /* Frameworks */,
+				B815883D25436102009195A0 /* Assets.xcassets */,
 				B8FA7E8A254507E800EAD17E /* SpamML-Bridging-Header.h */,
 				B8FA7E732544EEA000EAD17E /* SpamML.entitlements */,
 				B8FA7E7E2544F29A00EAD17E /* Info.plist */,
@@ -134,20 +140,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B81588BC2544E103009195A0 /* Controllers */ = {
+		B81588C82544E488009195A0 /* Google */ = {
 			isa = PBXGroup;
 			children = (
-				B81588C82544E488009195A0 /* Google Sign In */,
+				B88201B1254620E30011B1E1 /* Sign In */,
 			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		B81588C82544E488009195A0 /* Google Sign In */ = {
-			isa = PBXGroup;
-			children = (
-				B81588BD2544E114009195A0 /* GoogleSignInController.swift */,
-			);
-			path = "Google Sign In";
+			path = Google;
 			sourceTree = "<group>";
 		};
 		B81588CD2544E490009195A0 /* User Interface */ = {
@@ -197,6 +195,54 @@
 				B8FA7E91254507E900EAD17E /* OIDExternalUserAgentIOS.m */,
 			);
 			path = "Google Sign In";
+			sourceTree = "<group>";
+		};
+		B88201AB254594760011B1E1 /* Helpers & Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B88201AC2545948B0011B1E1 /* Keychain.swift */,
+			);
+			path = "Helpers & Extensions";
+			sourceTree = "<group>";
+		};
+		B88201AF254620AA0011B1E1 /* API Services */ = {
+			isa = PBXGroup;
+			children = (
+				B81588C82544E488009195A0 /* Google */,
+			);
+			path = "API Services";
+			sourceTree = "<group>";
+		};
+		B88201B1254620E30011B1E1 /* Sign In */ = {
+			isa = PBXGroup;
+			children = (
+				B81588BD2544E114009195A0 /* GoogleSignInService.swift */,
+			);
+			path = "Sign In";
+			sourceTree = "<group>";
+		};
+		B88201B32546213F0011B1E1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B88201B4254621460011B1E1 /* Google APIs */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B88201B4254621460011B1E1 /* Google APIs */ = {
+			isa = PBXGroup;
+			children = (
+				B88201B5254621510011B1E1 /* User Info */,
+			);
+			path = "Google APIs";
+			sourceTree = "<group>";
+		};
+		B88201B5254621510011B1E1 /* User Info */ = {
+			isa = PBXGroup;
+			children = (
+				B88201B62546215F0011B1E1 /* GoogleUserInfo.swift */,
+			);
+			path = "User Info";
 			sourceTree = "<group>";
 		};
 		B8FA7E88254507B000EAD17E /* Frameworks */ = {
@@ -342,9 +388,11 @@
 				B8FA7E94254507E900EAD17E /* OIDExternalUserAgentCatalyst.m in Sources */,
 				B8FA7E95254507E900EAD17E /* OIDAuthorizationService+IOS.m in Sources */,
 				B8FA7E97254507E900EAD17E /* OIDExternalUserAgentIOS.m in Sources */,
-				B81588BE2544E114009195A0 /* GoogleSignInController.swift in Sources */,
+				B88201AD2545948B0011B1E1 /* Keychain.swift in Sources */,
+				B81588BE2544E114009195A0 /* GoogleSignInService.swift in Sources */,
 				B81588EE2544E8E3009195A0 /* LoginViewController.swift in Sources */,
 				B815886425436102009195A0 /* SpamMLApp.swift in Sources */,
+				B88201B72546215F0011B1E1 /* GoogleUserInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

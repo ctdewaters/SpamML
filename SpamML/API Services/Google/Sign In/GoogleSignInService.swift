@@ -1,5 +1,5 @@
 //
-//  GoogleSignInController.swift
+//  GoogleSignInService.swift
 //  SpamML
 //
 //  Created by Collin DeWaters on 10/24/20.
@@ -11,19 +11,21 @@ import MailCore
 import Reachability
 
 /// Handles interaction with the Google Sign In API.
-final class GoogleSignInController: NSObject {
-    var currentAuthorizationFlow: OIDExternalUserAgentSession!
-    var authorization: GTMAppAuthFetcherAuthorization!
-    
-    static var shared: GoogleSignInController!
-    
-    private let redirectURI = "com.googleusercontent.apps.906281823650-n37hvdg2sskj88bd64sslh04r08c9ieo"
-    private let clientID = "906281823650-n37hvdg2sskj88bd64sslh04r08c9ieo.apps.googleusercontent.com"
+final class GoogleSignInService: NSObject {
+    static var shared: GoogleSignInService!
+
+    var currentAuthorizationFlow: OIDExternalUserAgentSession?
+    var authorization: GTMAppAuthFetcherAuthorization?
+        
+    private let redirectURI = "com.googleusercontent.apps.906281823650-r09686rj7oonfrh65lbcke4opah72ojs:/oauthredirect"
+    private let clientID = "906281823650-r09686rj7oonfrh65lbcke4opah72ojs.apps.googleusercontent.com"
     private let issuer = "https://accounts.google.com"
+    private let authKey = "googleauthkey_changethis"
     
     private let reachability: Reachability = { try! Reachability() }()
     
-    private let authKey = "googleauthkey_changethis"
+    private let fetcherService = GTMSessionFetcherService()
+    
     
     override init() {
     }
@@ -31,7 +33,7 @@ final class GoogleSignInController: NSObject {
     func performLoginIfRequired(withPresentingViewController presentingViewController: UIViewController, andCompletion completion: @escaping ()->Void) {
         if reachability.connection != .unavailable {
             DispatchQueue.main.async {
-                self.checkIfAuthorizationIsValid { authenticated in
+                self.checkIfAuthorizationIsValid(self.authorization) { authenticated in
                     assert(Thread.current.isMainThread, "ERROR MAIN THREAD REQUIRED")
                     
                     if authenticated {
@@ -46,11 +48,11 @@ final class GoogleSignInController: NSObject {
     }
     
     private func saveState() {
-        if authorization.canAuthorize() {
-            GTMAppAuthFetcherAuthorization.save(authorization, toKeychainForName: authKey)
+        if let auth = authorization, auth.canAuthorize() {
+            GTMAppAuthFetcherAuthorization.save(auth, toKeychainForName: authKey)
         }
         else {
-            print("GoogleSignInController: WARNING, attempt to save a Google authorization which is unable to be authorized. Discarding.")
+            print("GoogleSignInService: WARNING, attempt to save a Google authorization which is unable to be authorized. Discarding.")
             GTMAppAuthFetcherAuthorization.removeFromKeychain(forName: authKey)
         }
     }
@@ -62,7 +64,7 @@ final class GoogleSignInController: NSObject {
             self.authorization = auth
         }
         else {
-            print("GoogleSignInController: WARNING, loaded Google authorization unable to be authorized. Discaring.")
+            print("GoogleSignInService: WARNING, loaded Google authorization unable to be authorized. Discaring.")
             GTMAppAuthFetcherAuthorization.removeFromKeychain(forName: authKey)
         }
     }
@@ -71,53 +73,44 @@ final class GoogleSignInController: NSObject {
         let issuerURL = URL(string: issuer)!
         let redirectURL = URL(string: redirectURI)!
         
-        print("GoogleSignInController: Fetching configuration for issuer: \(issuer).")
+        print("GoogleSignInService: Fetching configuration for issuer: \(issuer).")
         
         OIDAuthorizationService.discoverConfiguration(forIssuer: issuerURL) { [weak self] (config, error) in
             guard let sself = self else { return }
             guard let config = config else {
-                print("GoogleSignInController: Error retrieving discovery document: \(error?.localizedDescription ?? "")")
+                print("GoogleSignInService: Error retrieving discovery document: \(error?.localizedDescription ?? "")")
                 self?.authorization = nil
                 return
             }
             
-            print("GoogleSignInController: Discovered configuration: \(config)")
+            print("GoogleSignInService: Discovered configuration: \(config)")
             
             let request = OIDAuthorizationRequest(configuration: config,
                                                   clientId: sself.clientID,
-                                                  scopes: [OIDScopeOpenID, OIDScopeProfile, "https://mail.google.com/"],
+                                                  scopes: [OIDScopeOpenID, OIDScopeProfile, OIDScopeEmail, "https://mail.google.com/"],
                                                   redirectURL: redirectURL,
                                                   responseType: OIDResponseTypeCode,
                                                   additionalParameters: nil)
             
-            print("GoogleSignInController: Initiating authorization request with scope: \(request.scope ?? "")")
+            print("GoogleSignInService: Initiating authorization request with scope: \(request.scope ?? "")")
             
             sself.currentAuthorizationFlow = OIDAuthState.authState(byPresenting: request, presenting: presentingViewController) { [weak self] authState, error in
                 if let authState = authState {
                     self?.authorization = GTMAppAuthFetcherAuthorization(authState: authState)
-                    print("GoogleSignInController: Retrieved authorization tokens. Access token: \(authState.lastTokenResponse?.accessToken ?? "")")
+                    print("GoogleSignInService: Retrieved authorization tokens. Access token: \(authState.lastTokenResponse?.accessToken ?? "")")
                     self?.saveState()
                 }
                 else {
                     self?.authorization = nil
-                    print("GoogleSignInController: Authorization error: \(error?.localizedDescription ?? "")")
+                    print("GoogleSignInService: Authorization error: \(error?.localizedDescription ?? "")")
                 }
                 DispatchQueue.main.async { completion() }
             }
         }
     }
 
-    private func checkIfAuthorizationIsValid(withCompletion completion: ((Bool)->Void)?) {
-        print("GoogleSignInController: Performing UserInfo request.")
-        
-        // Creates a GTMSessionFetcherService with the authorization.
-        // Normally you would save this service object and re-use it for all REST API calls.
-        let fetcherService = GTMSessionFetcherService()
-        fetcherService.authorizer = authorization
-        
-        // Creates a fetcher for the API call.
-        let fetcher = fetcherService.fetcher(withURLString: "https://www.googleapis.com/oauth2/v3/userinfo")
-        fetcher.beginFetch { [unowned self] data, error in
+    private func checkIfAuthorizationIsValid(_ authorization: GTMAppAuthFetcherAuthorization?, withCompletion completion: ((Bool)->Void)?) {
+        retrieveUserInfo(withAuthorization: authorization) { _, error in
             guard error == nil else {
                 // OIDOAuthTokenErrorDomain indicates an issue with the authorization.
                 let error = error! as NSError
@@ -125,18 +118,44 @@ final class GoogleSignInController: NSObject {
                     GTMAppAuthFetcherAuthorization.removeFromKeychain(forName: self.authKey)
                     self.authorization = nil
                     
-                    print("GoogleSignInController: Authorization error during token refresh. Cleared authentication state. \(error)")
                     completion?(false)
                 }
                 else {
-                    print("GoogleSignInController: Transient error during token refresh. \(error)")
                     completion?(false)
                 }
                 return
             }
-            
-            print("GoogleSignInController: Authentication is valid.")
             completion?(true)
+        }
+    }
+}
+
+// MARK: - UserInfo
+extension GoogleSignInService {
+    func retrieveUserInfo(withAuthorization authorization: GTMAppAuthFetcherAuthorization?, withCompletion completion: @escaping (GoogleUserInfo?, Error?)->Void) {
+        
+        fetcherService.authorizer = authorization
+                
+        let fetcher = fetcherService.fetcher(withURLString: "https://www.googleapis.com/oauth2/v3/userinfo")
+        fetcher.beginFetch { data, error in
+            guard let data = data else {
+                completion(nil, error)
+                return
+            }
+            
+            let userInfo = try? JSONDecoder().decode(GoogleUserInfo.self, from: data)
+            completion(userInfo, error)
+        }
+    }
+    
+    func retrieveUserImage(withAuthorization authorization: GTMAppAuthFetcherAuthorization?, andUserInfo userInfo: GoogleUserInfo, withCompletion completion: @escaping (UIImage?)->Void) {
+        fetcherService.authorizer = authorization
+        
+        let fetcher = fetcherService.fetcher(withURLString: userInfo.pictureURLString)
+        fetcher.beginFetch { data, _ in
+            guard let data = data else { completion(nil); return }
+            let image = UIImage(data: data)
+            completion(image)
         }
     }
 }

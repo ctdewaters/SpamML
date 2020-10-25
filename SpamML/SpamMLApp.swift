@@ -10,15 +10,12 @@ import SwiftUI
 @main
 struct SpamMLApp: App {
     init() {
-        GoogleSignInController.shared = GoogleSignInController()
+        GoogleSignInService.shared = GoogleSignInService()
     }
 
     var body: some Scene {
         WindowGroup {
             LoginView()
-                .onOpenURL{ url in
-                    //GoogleSignInController.shared.handle(url: url)
-                }
         }
     }
 }

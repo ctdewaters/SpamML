@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func signInWithGoogle(_ sender: Any) {
-        GoogleSignInController.shared.performLoginIfRequired(withPresentingViewController: self) {
+        GoogleSignInService.shared.performLoginIfRequired(withPresentingViewController: self) {
             
         }
     }
