@@ -3,52 +3,59 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B815885725436102009195A0 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B815885625436102009195A0 /* Tests_iOS.swift */; };
-		B815886225436102009195A0 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B815886125436102009195A0 /* Tests_macOS.swift */; };
+		4888A4694223266BB893DFB0 /* Pods_SpamML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D4DA67FFB7E84B48B3D344 /* Pods_SpamML.framework */; };
 		B815886425436102009195A0 /* SpamMLApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B815883B25436101009195A0 /* SpamMLApp.swift */; };
-		B815886525436102009195A0 /* SpamMLApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B815883B25436101009195A0 /* SpamMLApp.swift */; };
 		B815886625436102009195A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B815883C25436101009195A0 /* ContentView.swift */; };
-		B815886725436102009195A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B815883C25436101009195A0 /* ContentView.swift */; };
 		B815886825436102009195A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B815883D25436102009195A0 /* Assets.xcassets */; };
-		B815886925436102009195A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B815883D25436102009195A0 /* Assets.xcassets */; };
+		B815888D2544DDE1009195A0 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B815888C2544DDE1009195A0 /* LocalAuthentication.framework */; };
+		B815888F2544DDEF009195A0 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B815888E2544DDEF009195A0 /* SafariServices.framework */; };
+		B81588912544DDFD009195A0 /* AuthenticationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B81588902544DDFD009195A0 /* AuthenticationServices.framework */; };
+		B81588932544DE06009195A0 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B81588922544DE06009195A0 /* SystemConfiguration.framework */; };
+		B81588BE2544E114009195A0 /* GoogleSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81588BD2544E114009195A0 /* GoogleSignInController.swift */; };
+		B81588EE2544E8E3009195A0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81588EC2544E8E3009195A0 /* LoginViewController.swift */; };
+		B81588F02544E8E3009195A0 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B81588ED2544E8E3009195A0 /* LoginViewController.xib */; };
+		B8FA7E702544EE9200EAD17E /* MailCore2 in Frameworks */ = {isa = PBXBuildFile; productRef = B8FA7E6F2544EE9200EAD17E /* MailCore2 */; };
+		B8FA7E862544FD2D00EAD17E /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B8FA7E852544FD2D00EAD17E /* Reachability */; };
+		B8FA7E94254507E900EAD17E /* OIDExternalUserAgentCatalyst.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FA7E8C254507E900EAD17E /* OIDExternalUserAgentCatalyst.m */; };
+		B8FA7E95254507E900EAD17E /* OIDAuthorizationService+IOS.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FA7E8D254507E900EAD17E /* OIDAuthorizationService+IOS.m */; };
+		B8FA7E96254507E900EAD17E /* OIDAuthState+IOS.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FA7E90254507E900EAD17E /* OIDAuthState+IOS.m */; };
+		B8FA7E97254507E900EAD17E /* OIDExternalUserAgentIOS.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FA7E91254507E900EAD17E /* OIDExternalUserAgentIOS.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		B815885325436102009195A0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B815883625436101009195A0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B815884125436102009195A0;
-			remoteInfo = "SpamML (iOS)";
-		};
-		B815885E25436102009195A0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B815883625436101009195A0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B815884925436102009195A0;
-			remoteInfo = "SpamML (macOS)";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		01D4DA67FFB7E84B48B3D344 /* Pods_SpamML.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpamML.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		73454F955579D9C2BBE6B5E9 /* Pods-SpamML.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpamML.release.xcconfig"; path = "Target Support Files/Pods-SpamML/Pods-SpamML.release.xcconfig"; sourceTree = "<group>"; };
+		A44487CF782A9CD07081D4DF /* Pods-SpamML.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpamML.debug.xcconfig"; path = "Target Support Files/Pods-SpamML/Pods-SpamML.debug.xcconfig"; sourceTree = "<group>"; };
 		B815883B25436101009195A0 /* SpamMLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamMLApp.swift; sourceTree = "<group>"; };
 		B815883C25436101009195A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B815883D25436102009195A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B815884225436102009195A0 /* SpamML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpamML.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B815884525436102009195A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B815884A25436102009195A0 /* SpamML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpamML.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B815884C25436102009195A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B815884D25436102009195A0 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
-		B815885225436102009195A0 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B815885625436102009195A0 /* Tests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOS.swift; sourceTree = "<group>"; };
-		B815885825436102009195A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B815885D25436102009195A0 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B815886125436102009195A0 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
-		B815886325436102009195A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B815888C2544DDE1009195A0 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.2.sdk/System/Library/Frameworks/LocalAuthentication.framework; sourceTree = DEVELOPER_DIR; };
+		B815888E2544DDEF009195A0 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.2.sdk/System/Library/Frameworks/SafariServices.framework; sourceTree = DEVELOPER_DIR; };
+		B81588902544DDFD009195A0 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.2.sdk/System/Library/Frameworks/AuthenticationServices.framework; sourceTree = DEVELOPER_DIR; };
+		B81588922544DE06009195A0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.2.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		B81588942544DE17009195A0 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		B81588962544DE1C009195A0 /* AuthenticationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AuthenticationServices.framework; path = System/Library/Frameworks/AuthenticationServices.framework; sourceTree = SDKROOT; };
+		B81588982544DE20009195A0 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		B815889A2544DE28009195A0 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B81588BD2544E114009195A0 /* GoogleSignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInController.swift; sourceTree = "<group>"; };
+		B81588EC2544E8E3009195A0 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		B81588ED2544E8E3009195A0 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		B8FA7E732544EEA000EAD17E /* SpamML.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpamML.entitlements; sourceTree = "<group>"; };
+		B8FA7E7E2544F29A00EAD17E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B8FA7E8A254507E800EAD17E /* SpamML-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpamML-Bridging-Header.h"; sourceTree = "<group>"; };
+		B8FA7E8B254507E900EAD17E /* OIDExternalUserAgentIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OIDExternalUserAgentIOS.h; sourceTree = "<group>"; };
+		B8FA7E8C254507E900EAD17E /* OIDExternalUserAgentCatalyst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OIDExternalUserAgentCatalyst.m; sourceTree = "<group>"; };
+		B8FA7E8D254507E900EAD17E /* OIDAuthorizationService+IOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OIDAuthorizationService+IOS.m"; sourceTree = "<group>"; };
+		B8FA7E8E254507E900EAD17E /* OIDAuthorizationService+IOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OIDAuthorizationService+IOS.h"; sourceTree = "<group>"; };
+		B8FA7E90254507E900EAD17E /* OIDAuthState+IOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OIDAuthState+IOS.m"; sourceTree = "<group>"; };
+		B8FA7E91254507E900EAD17E /* OIDExternalUserAgentIOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OIDExternalUserAgentIOS.m; sourceTree = "<group>"; };
+		B8FA7E92254507E900EAD17E /* OIDAuthState+IOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OIDAuthState+IOS.h"; sourceTree = "<group>"; };
+		B8FA7E93254507E900EAD17E /* OIDExternalUserAgentCatalyst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OIDExternalUserAgentCatalyst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,173 +63,183 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B815884725436102009195A0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B815884F25436102009195A0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B815885A25436102009195A0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				B8FA7E702544EE9200EAD17E /* MailCore2 in Frameworks */,
+				B8FA7E862544FD2D00EAD17E /* Reachability in Frameworks */,
+				B81588912544DDFD009195A0 /* AuthenticationServices.framework in Frameworks */,
+				B815888D2544DDE1009195A0 /* LocalAuthentication.framework in Frameworks */,
+				B815888F2544DDEF009195A0 /* SafariServices.framework in Frameworks */,
+				B81588932544DE06009195A0 /* SystemConfiguration.framework in Frameworks */,
+				4888A4694223266BB893DFB0 /* Pods_SpamML.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5701522F218B33107B3DE64E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A44487CF782A9CD07081D4DF /* Pods-SpamML.debug.xcconfig */,
+				73454F955579D9C2BBE6B5E9 /* Pods-SpamML.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B815883525436101009195A0 = {
 			isa = PBXGroup;
 			children = (
-				B815883A25436101009195A0 /* Shared */,
-				B815884425436102009195A0 /* iOS */,
-				B815884B25436102009195A0 /* macOS */,
-				B815885525436102009195A0 /* Tests iOS */,
-				B815886025436102009195A0 /* Tests macOS */,
+				B815883A25436101009195A0 /* SpamML */,
 				B815884325436102009195A0 /* Products */,
+				B815888B2544DDE1009195A0 /* Frameworks */,
+				5701522F218B33107B3DE64E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
-		B815883A25436101009195A0 /* Shared */ = {
+		B815883A25436101009195A0 /* SpamML */ = {
 			isa = PBXGroup;
 			children = (
 				B815883B25436101009195A0 /* SpamMLApp.swift */,
-				B815883C25436101009195A0 /* ContentView.swift */,
+				B81588CD2544E490009195A0 /* User Interface */,
 				B815883D25436102009195A0 /* Assets.xcassets */,
+				B81588BC2544E103009195A0 /* Controllers */,
+				B8FA7E88254507B000EAD17E /* Frameworks */,
+				B8FA7E8A254507E800EAD17E /* SpamML-Bridging-Header.h */,
+				B8FA7E732544EEA000EAD17E /* SpamML.entitlements */,
+				B8FA7E7E2544F29A00EAD17E /* Info.plist */,
 			);
-			path = Shared;
+			path = SpamML;
 			sourceTree = "<group>";
 		};
 		B815884325436102009195A0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				B815884225436102009195A0 /* SpamML.app */,
-				B815884A25436102009195A0 /* SpamML.app */,
-				B815885225436102009195A0 /* Tests iOS.xctest */,
-				B815885D25436102009195A0 /* Tests macOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B815884425436102009195A0 /* iOS */ = {
+		B815888B2544DDE1009195A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B815884525436102009195A0 /* Info.plist */,
+				B815889A2544DE28009195A0 /* SystemConfiguration.framework */,
+				B81588982544DE20009195A0 /* LocalAuthentication.framework */,
+				B81588962544DE1C009195A0 /* AuthenticationServices.framework */,
+				B81588942544DE17009195A0 /* SafariServices.framework */,
+				B81588922544DE06009195A0 /* SystemConfiguration.framework */,
+				B81588902544DDFD009195A0 /* AuthenticationServices.framework */,
+				B815888E2544DDEF009195A0 /* SafariServices.framework */,
+				B815888C2544DDE1009195A0 /* LocalAuthentication.framework */,
+				01D4DA67FFB7E84B48B3D344 /* Pods_SpamML.framework */,
 			);
-			path = iOS;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B815884B25436102009195A0 /* macOS */ = {
+		B81588BC2544E103009195A0 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B815884C25436102009195A0 /* Info.plist */,
-				B815884D25436102009195A0 /* macOS.entitlements */,
+				B81588C82544E488009195A0 /* Google Sign In */,
 			);
-			path = macOS;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		B815885525436102009195A0 /* Tests iOS */ = {
+		B81588C82544E488009195A0 /* Google Sign In */ = {
 			isa = PBXGroup;
 			children = (
-				B815885625436102009195A0 /* Tests_iOS.swift */,
-				B815885825436102009195A0 /* Info.plist */,
+				B81588BD2544E114009195A0 /* GoogleSignInController.swift */,
 			);
-			path = "Tests iOS";
+			path = "Google Sign In";
 			sourceTree = "<group>";
 		};
-		B815886025436102009195A0 /* Tests macOS */ = {
+		B81588CD2544E490009195A0 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
-				B815886125436102009195A0 /* Tests_macOS.swift */,
-				B815886325436102009195A0 /* Info.plist */,
+				B81588E32544E8B2009195A0 /* SwiftUI */,
+				B81588E22544E8AD009195A0 /* UIKit */,
 			);
-			path = "Tests macOS";
+			path = "User Interface";
+			sourceTree = "<group>";
+		};
+		B81588E22544E8AD009195A0 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				B81588F62544E8E7009195A0 /* Login */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		B81588E32544E8B2009195A0 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				B815883C25436101009195A0 /* ContentView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		B81588F62544E8E7009195A0 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				B81588EC2544E8E3009195A0 /* LoginViewController.swift */,
+				B81588ED2544E8E3009195A0 /* LoginViewController.xib */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		B88201A925450BA60011B1E1 /* Google Sign In */ = {
+			isa = PBXGroup;
+			children = (
+				B8FA7E8E254507E900EAD17E /* OIDAuthorizationService+IOS.h */,
+				B8FA7E8D254507E900EAD17E /* OIDAuthorizationService+IOS.m */,
+				B8FA7E92254507E900EAD17E /* OIDAuthState+IOS.h */,
+				B8FA7E90254507E900EAD17E /* OIDAuthState+IOS.m */,
+				B8FA7E93254507E900EAD17E /* OIDExternalUserAgentCatalyst.h */,
+				B8FA7E8C254507E900EAD17E /* OIDExternalUserAgentCatalyst.m */,
+				B8FA7E8B254507E900EAD17E /* OIDExternalUserAgentIOS.h */,
+				B8FA7E91254507E900EAD17E /* OIDExternalUserAgentIOS.m */,
+			);
+			path = "Google Sign In";
+			sourceTree = "<group>";
+		};
+		B8FA7E88254507B000EAD17E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B8FA7E89254507BE00EAD17E /* Extensions */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		B8FA7E89254507BE00EAD17E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B88201A925450BA60011B1E1 /* Google Sign In */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B815884125436102009195A0 /* SpamML (iOS) */ = {
+		B815884125436102009195A0 /* SpamML */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B815886C25436102009195A0 /* Build configuration list for PBXNativeTarget "SpamML (iOS)" */;
+			buildConfigurationList = B815886C25436102009195A0 /* Build configuration list for PBXNativeTarget "SpamML" */;
 			buildPhases = (
+				F6516D3FC0F69D65CA5C36EC /* [CP] Check Pods Manifest.lock */,
 				B815883E25436102009195A0 /* Sources */,
 				B815883F25436102009195A0 /* Frameworks */,
 				B815884025436102009195A0 /* Resources */,
+				1FDAE7B9CA88B3C67B3E4B6F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "SpamML (iOS)";
+			name = SpamML;
+			packageProductDependencies = (
+				B8FA7E6F2544EE9200EAD17E /* MailCore2 */,
+				B8FA7E852544FD2D00EAD17E /* Reachability */,
+			);
 			productName = "SpamML (iOS)";
 			productReference = B815884225436102009195A0 /* SpamML.app */;
 			productType = "com.apple.product-type.application";
-		};
-		B815884925436102009195A0 /* SpamML (macOS) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B815886F25436102009195A0 /* Build configuration list for PBXNativeTarget "SpamML (macOS)" */;
-			buildPhases = (
-				B815884625436102009195A0 /* Sources */,
-				B815884725436102009195A0 /* Frameworks */,
-				B815884825436102009195A0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "SpamML (macOS)";
-			productName = "SpamML (macOS)";
-			productReference = B815884A25436102009195A0 /* SpamML.app */;
-			productType = "com.apple.product-type.application";
-		};
-		B815885125436102009195A0 /* Tests iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B815887225436102009195A0 /* Build configuration list for PBXNativeTarget "Tests iOS" */;
-			buildPhases = (
-				B815884E25436102009195A0 /* Sources */,
-				B815884F25436102009195A0 /* Frameworks */,
-				B815885025436102009195A0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B815885425436102009195A0 /* PBXTargetDependency */,
-			);
-			name = "Tests iOS";
-			productName = "Tests iOS";
-			productReference = B815885225436102009195A0 /* Tests iOS.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
-		B815885C25436102009195A0 /* Tests macOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B815887525436102009195A0 /* Build configuration list for PBXNativeTarget "Tests macOS" */;
-			buildPhases = (
-				B815885925436102009195A0 /* Sources */,
-				B815885A25436102009195A0 /* Frameworks */,
-				B815885B25436102009195A0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B815885F25436102009195A0 /* PBXTargetDependency */,
-			);
-			name = "Tests macOS";
-			productName = "Tests macOS";
-			productReference = B815885D25436102009195A0 /* Tests macOS.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -235,17 +252,7 @@
 				TargetAttributes = {
 					B815884125436102009195A0 = {
 						CreatedOnToolsVersion = 12.2;
-					};
-					B815884925436102009195A0 = {
-						CreatedOnToolsVersion = 12.2;
-					};
-					B815885125436102009195A0 = {
-						CreatedOnToolsVersion = 12.2;
-						TestTargetID = B815884125436102009195A0;
-					};
-					B815885C25436102009195A0 = {
-						CreatedOnToolsVersion = 12.2;
-						TestTargetID = B815884925436102009195A0;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -258,14 +265,15 @@
 				Base,
 			);
 			mainGroup = B815883525436101009195A0;
+			packageReferences = (
+				B8FA7E6E2544EE9200EAD17E /* XCRemoteSwiftPackageReference "mailcore2" */,
+				B8FA7E842544FD2D00EAD17E /* XCRemoteSwiftPackageReference "Reachability" */,
+			);
 			productRefGroup = B815884325436102009195A0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B815884125436102009195A0 /* SpamML (iOS) */,
-				B815884925436102009195A0 /* SpamML (macOS) */,
-				B815885125436102009195A0 /* Tests iOS */,
-				B815885C25436102009195A0 /* Tests macOS */,
+				B815884125436102009195A0 /* SpamML */,
 			);
 		};
 /* End PBXProject section */
@@ -276,32 +284,53 @@
 			buildActionMask = 2147483647;
 			files = (
 				B815886825436102009195A0 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B815884825436102009195A0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B815886925436102009195A0 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B815885025436102009195A0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B815885B25436102009195A0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				B81588F02544E8E3009195A0 /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1FDAE7B9CA88B3C67B3E4B6F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SpamML/Pods-SpamML-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SpamML/Pods-SpamML-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SpamML/Pods-SpamML-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F6516D3FC0F69D65CA5C36EC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SpamML-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B815883E25436102009195A0 /* Sources */ = {
@@ -309,49 +338,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				B815886625436102009195A0 /* ContentView.swift in Sources */,
+				B8FA7E96254507E900EAD17E /* OIDAuthState+IOS.m in Sources */,
+				B8FA7E94254507E900EAD17E /* OIDExternalUserAgentCatalyst.m in Sources */,
+				B8FA7E95254507E900EAD17E /* OIDAuthorizationService+IOS.m in Sources */,
+				B8FA7E97254507E900EAD17E /* OIDExternalUserAgentIOS.m in Sources */,
+				B81588BE2544E114009195A0 /* GoogleSignInController.swift in Sources */,
+				B81588EE2544E8E3009195A0 /* LoginViewController.swift in Sources */,
 				B815886425436102009195A0 /* SpamMLApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B815884625436102009195A0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B815886725436102009195A0 /* ContentView.swift in Sources */,
-				B815886525436102009195A0 /* SpamMLApp.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B815884E25436102009195A0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B815885725436102009195A0 /* Tests_iOS.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B815885925436102009195A0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B815886225436102009195A0 /* Tests_macOS.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		B815885425436102009195A0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B815884125436102009195A0 /* SpamML (iOS) */;
-			targetProxy = B815885325436102009195A0 /* PBXContainerItemProxy */;
-		};
-		B815885F25436102009195A0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B815884925436102009195A0 /* SpamML (macOS) */;
-			targetProxy = B815885E25436102009195A0 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B815886A25436102009195A0 /* Debug */ = {
@@ -467,183 +464,73 @@
 		};
 		B815886D25436102009195A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A44487CF782A9CD07081D4DF /* Pods-SpamML.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SpamML/SpamML.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AP48SCT3J2;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = iOS/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SpamML/Frameworks",
+				);
+				INFOPLIST_FILE = SpamML/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.CollinDeWaters.SpamML;
 				PRODUCT_NAME = SpamML;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SpamML/SpamML-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
 		B815886E25436102009195A0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73454F955579D9C2BBE6B5E9 /* Pods-SpamML.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SpamML/SpamML.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AP48SCT3J2;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = iOS/Info.plist;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SpamML/Frameworks",
+				);
+				INFOPLIST_FILE = SpamML/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.CollinDeWaters.SpamML;
 				PRODUCT_NAME = SpamML;
 				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SpamML/SpamML-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		B815887025436102009195A0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AP48SCT3J2;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = macOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.CollinDeWaters.SpamML;
-				PRODUCT_NAME = SpamML;
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		B815887125436102009195A0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AP48SCT3J2;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = macOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.CollinDeWaters.SpamML;
-				PRODUCT_NAME = SpamML;
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		B815887325436102009195A0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AP48SCT3J2;
-				INFOPLIST_FILE = "Tests iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.CollinDeWaters.Tests-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "SpamML (iOS)";
-			};
-			name = Debug;
-		};
-		B815887425436102009195A0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AP48SCT3J2;
-				INFOPLIST_FILE = "Tests iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.CollinDeWaters.Tests-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "SpamML (iOS)";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		B815887625436102009195A0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AP48SCT3J2;
-				INFOPLIST_FILE = "Tests macOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.CollinDeWaters.Tests-macOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "SpamML (macOS)";
-			};
-			name = Debug;
-		};
-		B815887725436102009195A0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = AP48SCT3J2;
-				INFOPLIST_FILE = "Tests macOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.CollinDeWaters.Tests-macOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "SpamML (macOS)";
 			};
 			name = Release;
 		};
@@ -659,7 +546,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B815886C25436102009195A0 /* Build configuration list for PBXNativeTarget "SpamML (iOS)" */ = {
+		B815886C25436102009195A0 /* Build configuration list for PBXNativeTarget "SpamML" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B815886D25436102009195A0 /* Debug */,
@@ -668,34 +555,39 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B815886F25436102009195A0 /* Build configuration list for PBXNativeTarget "SpamML (macOS)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B815887025436102009195A0 /* Debug */,
-				B815887125436102009195A0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B815887225436102009195A0 /* Build configuration list for PBXNativeTarget "Tests iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B815887325436102009195A0 /* Debug */,
-				B815887425436102009195A0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B815887525436102009195A0 /* Build configuration list for PBXNativeTarget "Tests macOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B815887625436102009195A0 /* Debug */,
-				B815887725436102009195A0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B8FA7E6E2544EE9200EAD17E /* XCRemoteSwiftPackageReference "mailcore2" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MailCore/mailcore2";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		B8FA7E842544FD2D00EAD17E /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B8FA7E6F2544EE9200EAD17E /* MailCore2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B8FA7E6E2544EE9200EAD17E /* XCRemoteSwiftPackageReference "mailcore2" */;
+			productName = MailCore2;
+		};
+		B8FA7E852544FD2D00EAD17E /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B8FA7E842544FD2D00EAD17E /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B815883625436101009195A0 /* Project object */;
 }
