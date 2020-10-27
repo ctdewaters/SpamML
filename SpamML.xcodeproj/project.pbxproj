@@ -22,7 +22,7 @@
 		B88201B72546215F0011B1E1 /* GoogleUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88201B62546215F0011B1E1 /* GoogleUserInfo.swift */; };
 		B88201E225476E400011B1E1 /* IMAPAccountAuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88201E125476E400011B1E1 /* IMAPAccountAuthenticationView.swift */; };
 		B88201E725476E830011B1E1 /* IMAPAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88201E625476E830011B1E1 /* IMAPAccountViewModel.swift */; };
-		B88201EB25476E9C0011B1E1 /* IMAPAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88201EA25476E9C0011B1E1 /* IMAPAuthentication.swift */; };
+		B88201EB25476E9C0011B1E1 /* IMAPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88201EA25476E9C0011B1E1 /* IMAPCredentials.swift */; };
 		B8FA7E702544EE9200EAD17E /* MailCore2 in Frameworks */ = {isa = PBXBuildFile; productRef = B8FA7E6F2544EE9200EAD17E /* MailCore2 */; };
 		B8FA7E862544FD2D00EAD17E /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B8FA7E852544FD2D00EAD17E /* Reachability */; };
 		B8FA7E94254507E900EAD17E /* OIDExternalUserAgentCatalyst.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FA7E8C254507E900EAD17E /* OIDExternalUserAgentCatalyst.m */; };
@@ -54,7 +54,7 @@
 		B88201B62546215F0011B1E1 /* GoogleUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleUserInfo.swift; sourceTree = "<group>"; };
 		B88201E125476E400011B1E1 /* IMAPAccountAuthenticationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMAPAccountAuthenticationView.swift; sourceTree = "<group>"; };
 		B88201E625476E830011B1E1 /* IMAPAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMAPAccountViewModel.swift; sourceTree = "<group>"; };
-		B88201EA25476E9C0011B1E1 /* IMAPAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMAPAuthentication.swift; sourceTree = "<group>"; };
+		B88201EA25476E9C0011B1E1 /* IMAPCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMAPCredentials.swift; sourceTree = "<group>"; };
 		B8FA7E732544EEA000EAD17E /* SpamML.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpamML.entitlements; sourceTree = "<group>"; };
 		B8FA7E7E2544F29A00EAD17E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B8FA7E8A254507E800EAD17E /* SpamML-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpamML-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -281,7 +281,7 @@
 		B88201E925476E9C0011B1E1 /* IMAP */ = {
 			isa = PBXGroup;
 			children = (
-				B88201EA25476E9C0011B1E1 /* IMAPAuthentication.swift */,
+				B88201EA25476E9C0011B1E1 /* IMAPCredentials.swift */,
 			);
 			path = IMAP;
 			sourceTree = "<group>";
@@ -425,7 +425,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B815886625436102009195A0 /* ContentView.swift in Sources */,
-				B88201EB25476E9C0011B1E1 /* IMAPAuthentication.swift in Sources */,
+				B88201EB25476E9C0011B1E1 /* IMAPCredentials.swift in Sources */,
 				B88201E725476E830011B1E1 /* IMAPAccountViewModel.swift in Sources */,
 				B8FA7E96254507E900EAD17E /* OIDAuthState+IOS.m in Sources */,
 				B8FA7E94254507E900EAD17E /* OIDExternalUserAgentCatalyst.m in Sources */,
