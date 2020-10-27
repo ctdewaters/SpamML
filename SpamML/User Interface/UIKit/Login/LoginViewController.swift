@@ -11,6 +11,7 @@ import SwiftUI
 /// Handles adding an email account to the application.
 class LoginViewController: UIViewController {
     @IBOutlet private weak var googleButton: UIButton!
+    @IBOutlet private weak var imapButton: UIButton!
     
     init() {
         super.init(nibName: "LoginViewController", bundle: nil)
@@ -24,12 +25,15 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    // MARK: - IBActions
     @IBAction func signInWithGoogle(_ sender: Any) {
-        GoogleSignInService.shared.performLoginIfRequired(withPresentingViewController: self) {
-            
+        GoogleSignInService.shared.performLoginIfRequired(withPresentingViewController: self) { auth in
         }
     }
     
+    @IBAction func otherIMAP(_ sender: Any) {
+        present(IMAPAccountAuthenticationViewController(), animated: true)
+    }
 }
 
 struct LoginView: UIViewControllerRepresentable {

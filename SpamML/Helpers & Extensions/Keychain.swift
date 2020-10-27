@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GTMAppAuth
 
 /// `Keychain`: Provides access to the keychain for safe storage of passwords and tokens.
 public class Keychain {
@@ -29,24 +30,13 @@ public class Keychain {
     //MARK: - Subscript
     public subscript(key: String) -> String? {
         get {
-            return  self.load(withKey: key)
+            return self.loadString(withKey: key)
         }
         set {
-            self.save(newValue, forKey: key)
+            self.saveString(newValue, forKey: key)
         }
     }
-    
-    //MARK: - Known Stored Secure Values
-    /// The Google auth keys.
-    public var googleAuthKeys: [String] {
-        set {
-            self[Keychain.Key.googleAuthKeys] = newValue.joined(separator: " ")
-        }
-        get {
-            return self[Keychain.Key.googleAuthKeys]?.components(separatedBy: " ") ?? []
-        }
-    }
-    
+        
     //MARK: - Keychain Queries
     private func keychainQuery(withKey key: String) -> NSMutableDictionary {
         let result = NSMutableDictionary()
@@ -60,12 +50,26 @@ public class Keychain {
     /// Saves a string to the keychain, with a given key.
     /// - Parameter string: The string to save in the keychain.
     /// - Parameter key: The key, with which to save the string in the keychain.
-    private func save(_ string: String?, forKey key: String) {
-        let query = self.keychainQuery(withKey: key)
+    private func saveString(_ string: String?, forKey key: String) {
         let objectData: Data? = string?.data(using: .utf8, allowLossyConversion: false)
+        saveData(objectData, forKey: key)
+    }
+    
+    /// Loads a string from the keychain, with a given key.
+    /// - Parameter key: The key, from which to load a string from the keychain.
+    private func loadString(withKey key: String) -> String? {
+        guard let data = loadData(withKey: key) else { return nil }
+        return String(data: data, encoding: .utf8)
+    }
+    
+    /// Saves data  to the keychain, with a given key.
+    /// - Parameter data: The data to save in the keychain.
+    /// - Parameter key: The key, with which to save the data in the keychain.
+    private func saveData(_ data: Data?, forKey key: String) {
+        let query = self.keychainQuery(withKey: key)
 
         if SecItemCopyMatching(query, nil) == noErr {
-            if let dictData = objectData {
+            if let dictData = data {
                 SecItemUpdate(query, NSDictionary(dictionary: [kSecValueData: dictData]))
             }
             else {
@@ -73,16 +77,16 @@ public class Keychain {
             }
         }
         else {
-            if let dictData = objectData {
+            if let dictData = data {
                 query.setValue(dictData, forKey: kSecValueData as String)
                 SecItemAdd(query, nil)
             }
         }
     }
     
-    /// Loads a string from the keychain, with a given key.
-    /// - Parameter key: The key, from which to load a string from the keychain.
-    private func load(withKey key: String) -> String? {
+    /// Loads data from the keychain, with a given key.
+    /// - Parameter key: The key, from which to load data from the keychain.
+    private func loadData(withKey key: String) -> Data? {
         let query = self.keychainQuery(withKey: key)
         query.setValue(kCFBooleanTrue, forKey: kSecReturnData as String)
         query.setValue(kCFBooleanTrue, forKey: kSecReturnAttributes as String)
@@ -93,7 +97,46 @@ public class Keychain {
         guard let resultsDict = result as? NSDictionary, let resultsData = resultsDict.value(forKey: kSecValueData as String) as? Data, status == noErr else {
                 return nil
         }
-        return String(data: resultsData, encoding: .utf8)
+        return resultsData
     }
 }
 
+extension Keychain {
+    //MARK: - Known Google Sign In Values
+    /// The Google auth keys.
+    public var googleAuthKeys: [String] {
+        set {
+            self[Keychain.Key.googleAuthKeys] = Set(newValue).joined(separator: " ")
+        }
+        get {
+            guard let keys = self[Key.googleAuthKeys] else { return [] }
+            return Array(Set(keys.components(separatedBy: " ")))
+        }
+    }
+    
+    fileprivate func save(userInfo: GoogleUserInfo?, forAuthorization auth: GTMAppAuthFetcherAuthorization) {
+        guard var key = auth.userID else { return }
+        key += "-USERINFO"
+        let userInfoData = try? JSONEncoder().encode(userInfo)
+        saveData(userInfoData, forKey: key)
+    }
+    
+    fileprivate func loadUserInfo(forAuthorization auth: GTMAppAuthFetcherAuthorization) -> GoogleUserInfo? {
+        guard var key = auth.userID else { return nil }
+        key += "-USERINFO"
+        
+        guard let data = loadData(withKey: key) else { return nil }
+        return try? JSONDecoder().decode(GoogleUserInfo.self, from: data)
+    }
+}
+
+extension GTMAppAuthFetcherAuthorization {
+    var userInfo: GoogleUserInfo? {
+        set {
+            Keychain.shared.save(userInfo: newValue, forAuthorization: self)
+        }
+        get {
+            Keychain.shared.loadUserInfo(forAuthorization: self)
+        }
+    }
+}
