@@ -14,6 +14,7 @@ public class Keychain {
     /// `Keychain.Key`: Represents a key to store a value in the keychain.
     private struct Key {
         static let googleAuthKeys = "googleAuthKeys"
+        static let customIMAPAuthKeys = "customIMAPAuthKeys"
     }
     
     //MARK: - Error
@@ -42,7 +43,7 @@ public class Keychain {
         let result = NSMutableDictionary()
         result.setValue(kSecClassGenericPassword, forKey: kSecClass as String)
         result.setValue(key, forKey: kSecAttrService as String)
-        result.setValue(kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly, forKey: kSecAttrAccessible as String)
+        result.setValue(kSecAttrAccessibleWhenUnlocked, forKey: kSecAttrAccessible as String)
         return result
     }
     
@@ -101,12 +102,12 @@ public class Keychain {
     }
 }
 
+//MARK: - Google Sign In Properties
 extension Keychain {
-    //MARK: - Known Google Sign In Values
     /// The Google auth keys.
     public var googleAuthKeys: [String] {
         set {
-            self[Keychain.Key.googleAuthKeys] = Set(newValue).joined(separator: " ")
+            self[Key.googleAuthKeys] = Set(newValue).joined(separator: " ")
         }
         get {
             guard let keys = self[Key.googleAuthKeys] else { return [] }
@@ -124,9 +125,43 @@ extension Keychain {
     fileprivate func loadUserInfo(forAuthorization auth: GTMAppAuthFetcherAuthorization) -> GoogleUserInfo? {
         guard var key = auth.userID else { return nil }
         key += "-USERINFO"
-        
         guard let data = loadData(withKey: key) else { return nil }
         return try? JSONDecoder().decode(GoogleUserInfo.self, from: data)
+    }
+}
+
+// MARK: - Custom IMAP Account Properties
+extension Keychain {
+    private var imapAccountKeys: [String] {
+        set {
+            self[Key.customIMAPAuthKeys] = Set(newValue).joined(separator: " ")
+        }
+        get {
+            guard let keys = self[Key.customIMAPAuthKeys] else { return [] }
+            return Array(Set(keys.components(separatedBy: " ")))
+        }
+    }
+    
+    func save(imapCredentials: IMAPCredentials?, forKey key: String) {
+        let data = try? JSONEncoder().encode(imapCredentials)
+        
+        if let _ = data {
+            imapAccountKeys.append(key)
+        }
+        else {
+            imapAccountKeys.removeAll { $0 == key }
+        }
+        
+        saveData(data, forKey: key)
+    }
+    
+    func loadIMAPCredentials(forKey key: String) -> IMAPCredentials? {
+        guard let data = loadData(withKey: key) else { return nil }
+        return try? JSONDecoder().decode(IMAPCredentials.self, from: data)
+    }
+    
+    var allCustomIMAPCredentials: [IMAPCredentials] {
+        imapAccountKeys.compactMap { loadIMAPCredentials(forKey: $0) }
     }
 }
 
