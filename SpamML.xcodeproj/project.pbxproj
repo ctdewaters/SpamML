@@ -25,10 +25,6 @@
 		B88201EB25476E9C0011B1E1 /* IMAPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88201EA25476E9C0011B1E1 /* IMAPCredentials.swift */; };
 		B8FA7E702544EE9200EAD17E /* MailCore2 in Frameworks */ = {isa = PBXBuildFile; productRef = B8FA7E6F2544EE9200EAD17E /* MailCore2 */; };
 		B8FA7E862544FD2D00EAD17E /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B8FA7E852544FD2D00EAD17E /* Reachability */; };
-		B8FA7E94254507E900EAD17E /* OIDExternalUserAgentCatalyst.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FA7E8C254507E900EAD17E /* OIDExternalUserAgentCatalyst.m */; };
-		B8FA7E95254507E900EAD17E /* OIDAuthorizationService+IOS.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FA7E8D254507E900EAD17E /* OIDAuthorizationService+IOS.m */; };
-		B8FA7E96254507E900EAD17E /* OIDAuthState+IOS.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FA7E90254507E900EAD17E /* OIDAuthState+IOS.m */; };
-		B8FA7E97254507E900EAD17E /* OIDExternalUserAgentIOS.m in Sources */ = {isa = PBXBuildFile; fileRef = B8FA7E91254507E900EAD17E /* OIDExternalUserAgentIOS.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,15 +53,6 @@
 		B88201EA25476E9C0011B1E1 /* IMAPCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMAPCredentials.swift; sourceTree = "<group>"; };
 		B8FA7E732544EEA000EAD17E /* SpamML.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpamML.entitlements; sourceTree = "<group>"; };
 		B8FA7E7E2544F29A00EAD17E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B8FA7E8A254507E800EAD17E /* SpamML-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpamML-Bridging-Header.h"; sourceTree = "<group>"; };
-		B8FA7E8B254507E900EAD17E /* OIDExternalUserAgentIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OIDExternalUserAgentIOS.h; sourceTree = "<group>"; };
-		B8FA7E8C254507E900EAD17E /* OIDExternalUserAgentCatalyst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OIDExternalUserAgentCatalyst.m; sourceTree = "<group>"; };
-		B8FA7E8D254507E900EAD17E /* OIDAuthorizationService+IOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OIDAuthorizationService+IOS.m"; sourceTree = "<group>"; };
-		B8FA7E8E254507E900EAD17E /* OIDAuthorizationService+IOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OIDAuthorizationService+IOS.h"; sourceTree = "<group>"; };
-		B8FA7E90254507E900EAD17E /* OIDAuthState+IOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OIDAuthState+IOS.m"; sourceTree = "<group>"; };
-		B8FA7E91254507E900EAD17E /* OIDExternalUserAgentIOS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OIDExternalUserAgentIOS.m; sourceTree = "<group>"; };
-		B8FA7E92254507E900EAD17E /* OIDAuthState+IOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OIDAuthState+IOS.h"; sourceTree = "<group>"; };
-		B8FA7E93254507E900EAD17E /* OIDExternalUserAgentCatalyst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OIDExternalUserAgentCatalyst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,9 +101,7 @@
 				B88201B32546213F0011B1E1 /* Models */,
 				B88201AF254620AA0011B1E1 /* API Services */,
 				B88201AB254594760011B1E1 /* Helpers & Extensions */,
-				B8FA7E88254507B000EAD17E /* Frameworks */,
 				B815883D25436102009195A0 /* Assets.xcassets */,
-				B8FA7E8A254507E800EAD17E /* SpamML-Bridging-Header.h */,
 				B8FA7E732544EEA000EAD17E /* SpamML.entitlements */,
 				B8FA7E7E2544F29A00EAD17E /* Info.plist */,
 			);
@@ -214,21 +199,6 @@
 			path = "Account Authentication";
 			sourceTree = "<group>";
 		};
-		B88201A925450BA60011B1E1 /* Google Sign In */ = {
-			isa = PBXGroup;
-			children = (
-				B8FA7E8E254507E900EAD17E /* OIDAuthorizationService+IOS.h */,
-				B8FA7E8D254507E900EAD17E /* OIDAuthorizationService+IOS.m */,
-				B8FA7E92254507E900EAD17E /* OIDAuthState+IOS.h */,
-				B8FA7E90254507E900EAD17E /* OIDAuthState+IOS.m */,
-				B8FA7E93254507E900EAD17E /* OIDExternalUserAgentCatalyst.h */,
-				B8FA7E8C254507E900EAD17E /* OIDExternalUserAgentCatalyst.m */,
-				B8FA7E8B254507E900EAD17E /* OIDExternalUserAgentIOS.h */,
-				B8FA7E91254507E900EAD17E /* OIDExternalUserAgentIOS.m */,
-			);
-			path = "Google Sign In";
-			sourceTree = "<group>";
-		};
 		B88201AB254594760011B1E1 /* Helpers & Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,22 +254,6 @@
 				B88201EA25476E9C0011B1E1 /* IMAPCredentials.swift */,
 			);
 			path = IMAP;
-			sourceTree = "<group>";
-		};
-		B8FA7E88254507B000EAD17E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				B8FA7E89254507BE00EAD17E /* Extensions */,
-			);
-			path = Frameworks;
-			sourceTree = "<group>";
-		};
-		B8FA7E89254507BE00EAD17E /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				B88201A925450BA60011B1E1 /* Google Sign In */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,11 +380,7 @@
 			files = (
 				B815886625436102009195A0 /* ContentView.swift in Sources */,
 				B88201EB25476E9C0011B1E1 /* IMAPCredentials.swift in Sources */,
-				B8FA7E96254507E900EAD17E /* OIDAuthState+IOS.m in Sources */,
 				B825B3F625584CAD000BF777 /* IMAPAccountAuthenticationView.swift in Sources */,
-				B8FA7E94254507E900EAD17E /* OIDExternalUserAgentCatalyst.m in Sources */,
-				B8FA7E95254507E900EAD17E /* OIDAuthorizationService+IOS.m in Sources */,
-				B8FA7E97254507E900EAD17E /* OIDExternalUserAgentIOS.m in Sources */,
 				B88201AD2545948B0011B1E1 /* Keychain.swift in Sources */,
 				B81588BE2544E114009195A0 /* GoogleSignInService.swift in Sources */,
 				B81588EE2544E8E3009195A0 /* LoginViewController.swift in Sources */,
@@ -583,7 +533,6 @@
 				PRODUCT_NAME = SpamML;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "SpamML/SpamML-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,6";
@@ -619,7 +568,6 @@
 				PRODUCT_NAME = SpamML;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "SpamML/SpamML-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,6";
 				VALIDATE_PRODUCT = YES;
