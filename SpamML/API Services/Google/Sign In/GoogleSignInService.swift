@@ -89,17 +89,19 @@ final class GoogleSignInService: NSObject {
     // MARK: - Saving / Loading / Deleting Authorizations
     private func save(authorization: GTMAppAuthFetcherAuthorization?) {
         guard let auth = authorization, let key = auth.userID else { return }
-        Keychain.shared.googleAuthKeys.append(key)
+        
+        let accountKey = Keychain.AccountKey(key: key, source: .google)
+        Keychain.shared.accountKeys.append(accountKey)
         GTMAppAuthFetcherAuthorization.save(auth, toKeychainForName: key)
     }
     
-    private func load(authorizationWithKey key: String) {
-        GTMAppAuthFetcherAuthorization.removeFromKeychain(forName: key)
+    private func load(authorizationWithKey key: String) -> GTMAppAuthFetcherAuthorization? {
+        GTMAppAuthFetcherAuthorization(fromKeychainForName: key)
     }
 
     private func delete(authorization: GTMAppAuthFetcherAuthorization?) {
         guard let auth = authorization, let key = auth.userID else { return }
-        Keychain.shared.googleAuthKeys.removeAll { $0 == key }
+        Keychain.shared.accountKeys.removeAll { $0.keyString == key }
         GTMAppAuthFetcherAuthorization.removeFromKeychain(forName: key)
     }
 }

@@ -7,9 +7,18 @@
 
 import SwiftUI
 
-struct ContentView: View {    
+struct ContentView: View {
+    let keys = Keychain.shared.accountKeys
+    
     var body: some View {
-        Text("Content View")
+        VStack {
+            ForEach(keys) { key in
+                HStack {
+                    Text(key.keyString)
+                    Text("\(key.sourceRaw)")
+                }
+            }
+        }
     }
 }
 

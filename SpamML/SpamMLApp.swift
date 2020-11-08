@@ -15,7 +15,12 @@ struct SpamMLApp: App {
 
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            if Keychain.shared.accountKeys.isEmpty {
+                LoginView()
+            }
+            else {
+                ContentView()
+            }
         }
     }
 }

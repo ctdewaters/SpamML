@@ -13,6 +13,7 @@ public class Keychain {
     //MARK: - Key
     /// `Keychain.Key`: Represents a key to store a value in the keychain.
     private struct Key {
+        static let accountKeys = "accountKeys"
         static let googleAuthKeys = "googleAuthKeys"
         static let customIMAPAuthKeys = "customIMAPAuthKeys"
     }
@@ -102,19 +103,41 @@ public class Keychain {
     }
 }
 
-//MARK: - Google Sign In Properties
+// MARK: - Account Keys
 extension Keychain {
-    /// The Google auth keys.
-    public var googleAuthKeys: [String] {
-        set {
-            self[Key.googleAuthKeys] = Set(newValue).joined(separator: " ")
+    /// This represents a key where user account information is stored in the keychain.
+    /// It is also supplied with the source of the account.
+    struct AccountKey: Identifiable, Codable {
+        let keyString: String
+        let sourceRaw: Int
+        
+        var source: Source { Source.init(rawValue: sourceRaw)! }
+        var id: String { keyString }
+        
+        init(key: String, source: Source) {
+            keyString = key
+            sourceRaw = source.rawValue
         }
-        get {
-            guard let keys = self[Key.googleAuthKeys] else { return [] }
-            return Array(Set(keys.components(separatedBy: " ")))
+        
+        enum Source: Int {
+            case google, imap
         }
     }
     
+    var accountKeys: [AccountKey] {
+        set {
+            let data = try? JSONEncoder().encode(newValue)
+            saveData(data, forKey: Key.accountKeys)
+        }
+        get {
+            guard let data = loadData(withKey: Key.accountKeys) else { return [] }
+            return (try? JSONDecoder().decode([AccountKey].self, from: data)) ?? []
+        }
+    }
+}
+
+//MARK: - Google Sign In Properties
+extension Keychain {
     fileprivate func save(userInfo: GoogleUserInfo?, forAuthorization auth: GTMAppAuthFetcherAuthorization) {
         guard var key = auth.userID else { return }
         key += "-USERINFO"
@@ -132,24 +155,15 @@ extension Keychain {
 
 // MARK: - Custom IMAP Account Properties
 extension Keychain {
-    private var imapAccountKeys: [String] {
-        set {
-            self[Key.customIMAPAuthKeys] = Set(newValue).joined(separator: " ")
-        }
-        get {
-            guard let keys = self[Key.customIMAPAuthKeys] else { return [] }
-            return Array(Set(keys.components(separatedBy: " ")))
-        }
-    }
-    
     func save(imapCredentials: IMAPCredentials?, forKey key: String) {
         let data = try? JSONEncoder().encode(imapCredentials)
         
         if let _ = data {
-            imapAccountKeys.append(key)
+            let accountKey = AccountKey(key: key, source: .imap)
+            accountKeys.append(accountKey)
         }
         else {
-            imapAccountKeys.removeAll { $0 == key }
+            accountKeys.removeAll { $0.keyString == key }
         }
         
         saveData(data, forKey: key)
@@ -158,10 +172,6 @@ extension Keychain {
     func loadIMAPCredentials(forKey key: String) -> IMAPCredentials? {
         guard let data = loadData(withKey: key) else { return nil }
         return try? JSONDecoder().decode(IMAPCredentials.self, from: data)
-    }
-    
-    var allCustomIMAPCredentials: [IMAPCredentials] {
-        imapAccountKeys.compactMap { loadIMAPCredentials(forKey: $0) }
     }
 }
 

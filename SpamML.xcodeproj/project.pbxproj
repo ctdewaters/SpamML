@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4888A4694223266BB893DFB0 /* Pods_SpamML.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01D4DA67FFB7E84B48B3D344 /* Pods_SpamML.framework */; };
+		B80C32D9255869E2002E8730 /* EmailSpamClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B80C32D8255869E2002E8730 /* EmailSpamClassifier.mlmodel */; };
+		B80C32DF2558A268002E8730 /* AccountCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80C32DE2558A268002E8730 /* AccountCard.swift */; };
+		B80C32E32558A29D002E8730 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80C32E22558A29D002E8730 /* AccountViewModel.swift */; };
 		B815886425436102009195A0 /* SpamMLApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B815883B25436101009195A0 /* SpamMLApp.swift */; };
 		B815886625436102009195A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B815883C25436101009195A0 /* ContentView.swift */; };
 		B815886825436102009195A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B815883D25436102009195A0 /* Assets.xcassets */; };
@@ -31,6 +34,9 @@
 		01D4DA67FFB7E84B48B3D344 /* Pods_SpamML.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpamML.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73454F955579D9C2BBE6B5E9 /* Pods-SpamML.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpamML.release.xcconfig"; path = "Target Support Files/Pods-SpamML/Pods-SpamML.release.xcconfig"; sourceTree = "<group>"; };
 		A44487CF782A9CD07081D4DF /* Pods-SpamML.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpamML.debug.xcconfig"; path = "Target Support Files/Pods-SpamML/Pods-SpamML.debug.xcconfig"; sourceTree = "<group>"; };
+		B80C32D8255869E2002E8730 /* EmailSpamClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = EmailSpamClassifier.mlmodel; sourceTree = "<group>"; };
+		B80C32DE2558A268002E8730 /* AccountCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCard.swift; sourceTree = "<group>"; };
+		B80C32E22558A29D002E8730 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		B815883B25436101009195A0 /* SpamMLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamMLApp.swift; sourceTree = "<group>"; };
 		B815883C25436101009195A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B815883D25436102009195A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -82,6 +88,22 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B80C32DB255869E6002E8730 /* Machine Learning */ = {
+			isa = PBXGroup;
+			children = (
+				B80C32D8255869E2002E8730 /* EmailSpamClassifier.mlmodel */,
+			);
+			path = "Machine Learning";
+			sourceTree = "<group>";
+		};
+		B80C32E12558A282002E8730 /* Account Display */ = {
+			isa = PBXGroup;
+			children = (
+				B80C32E22558A29D002E8730 /* AccountViewModel.swift */,
+			);
+			path = "Account Display";
+			sourceTree = "<group>";
+		};
 		B815883525436101009195A0 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +123,7 @@
 				B88201B32546213F0011B1E1 /* Models */,
 				B88201AF254620AA0011B1E1 /* API Services */,
 				B88201AB254594760011B1E1 /* Helpers & Extensions */,
+				B80C32DB255869E6002E8730 /* Machine Learning */,
 				B815883D25436102009195A0 /* Assets.xcassets */,
 				B8FA7E732544EEA000EAD17E /* SpamML.entitlements */,
 				B8FA7E7E2544F29A00EAD17E /* Info.plist */,
@@ -161,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				B815883C25436101009195A0 /* ContentView.swift */,
+				B80C32DE2558A268002E8730 /* AccountCard.swift */,
 				B825B3F425584CAD000BF777 /* Login */,
 			);
 			path = SwiftUI;
@@ -186,6 +210,7 @@
 		B825B3F825584CC2000BF777 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				B80C32E12558A282002E8730 /* Account Display */,
 				B825B3F925584CC2000BF777 /* Account Authentication */,
 			);
 			path = "View Models";
@@ -385,7 +410,10 @@
 				B81588BE2544E114009195A0 /* GoogleSignInService.swift in Sources */,
 				B81588EE2544E8E3009195A0 /* LoginViewController.swift in Sources */,
 				B815886425436102009195A0 /* SpamMLApp.swift in Sources */,
+				B80C32DF2558A268002E8730 /* AccountCard.swift in Sources */,
+				B80C32D9255869E2002E8730 /* EmailSpamClassifier.mlmodel in Sources */,
 				B825B3FB25584CC2000BF777 /* IMAPAccountViewModel.swift in Sources */,
+				B80C32E32558A29D002E8730 /* AccountViewModel.swift in Sources */,
 				B88201B72546215F0011B1E1 /* GoogleUserInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
