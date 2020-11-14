@@ -14,7 +14,7 @@ class AccountViewModel: ObservableObject, Identifiable {
     
     var id: String = UUID().uuidString
     
-    @Published var flaggedEmails = [String]()
+    @Published var flaggedEmails = [EmailViewModel]()
     
     enum Provider {
         case google, imap, icloud
