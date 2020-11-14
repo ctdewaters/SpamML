@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Displays account information and spam emails for an authenticated account.
 struct AccountCard: View {
     @ObservedObject var accountViewModel: AccountViewModel
     
@@ -23,21 +24,19 @@ struct AccountCard: View {
                         .frame(width: 35, height: 35, alignment: .center)
                         .foregroundColor(.white)
                     Text(accountViewModel.emailAddress)
+                        .font(.system(size: 18, weight: .bold, design: .default))
+                        .lineLimit(1)
                         .foregroundColor(.white)
-                        .font(.system(size: 17, weight: .bold, design: .default))
                     Spacer()
+                    
                     Text("\(accountViewModel.flaggedEmails.count)")
-                        .font(.system(size: 15, weight: .bold, design: .monospaced))
-                        .foregroundColor(Color(accountViewModel.provider.tintColor))
-                        .frame(height: 20, alignment: .center)
-                        .padding(5)
-                        .background(Color.white)
-                        .cornerRadius(12)
+                        .lineLimit(1)
+                        .font(.system(size: 18, weight: .bold, design: .monospaced))
+                        .foregroundColor(.white)
+                        .padding(.trailing, 16)
                 }
-                .padding()
-                Divider()
-                    .background(Color.white)
-                
+                .padding([.horizontal, .top])
+
                 // Filtered Emails
                 ScrollView(.vertical) {
                     LazyVStack {
@@ -49,27 +48,39 @@ struct AccountCard: View {
                                 .padding(.leading, 16)
                         }
                     }
-                    .padding(EdgeInsets(top: 16, leading: 0, bottom: 60, trailing: 0))
+                    .padding(EdgeInsets(top: 20, leading: 0, bottom: 60, trailing: 0))
                 }
                 .mask(LinearGradient(gradient: Gradient(stops: [
-                    .init(color: .black, location: 0),
-                    .init(color: .black, location: 0.75),
+                    .init(color: .clear, location: 0),
+                    .init(color: .black, location: 0.05),
+                    .init(color: .black, location: 0.8),
                     .init(color: .clear, location: 1)
                 ]), startPoint: .top, endPoint: .bottom))
             }
             
-            Text("Delete All Spam")
-                .font(.headline)
-                .foregroundColor(Color(accountViewModel.provider.tintColor))
-                .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-                .background(Color.white)
-                .cornerRadius(50)
+            // Delete emails button
+            Button(action: {}, label: {
+                HStack {
+                    Image(systemName: "trash.fill")
+                    Text("Delete All Spam")
+                }
+            })
+            .font(.headline)
+            .foregroundColor(.red)
+            .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+            .background(Color.white)
+            .cornerRadius(50)
+
         }
         .padding(.bottom, 16)
         .frame(width: 375, height: 500, alignment: .topLeading)
-        .background(Color(accountViewModel.provider.tintColor))
-        .cornerRadius(30, antialiased: true)
-        .shadow(color: Color(accountViewModel.provider.tintColor.withAlphaComponent(0.75)), radius: 10, x: 0, y: 5)
+        .background(
+            Image(uiImage: accountViewModel.provider.cardBackground)
+                .resizable()
+                .overlay(Color(UIColor.black.withAlphaComponent(0.07)))
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
+        .shadow(color: Color(UIColor.darkGray.withAlphaComponent(0.45)), radius: 10, x: 0, y: 5)
     }
 }
 
@@ -91,5 +102,18 @@ struct AccountCard_Previews: PreviewProvider {
         accountViewModel.flaggedEmails = [emailViewModel1, emailViewModel2, emailViewModel3, emailViewModel4, emailViewModel5, emailViewModel6, emailViewModel7]
         
         return AccountCard(accountViewModel: accountViewModel)
+    }
+}
+
+extension View {
+    // view.inverseMask(_:)
+    public func inverseMask<M: View>(_ mask: M) -> some View {
+        // exchange foreground and background
+        let inversed = mask
+            .foregroundColor(.black)  // hide foreground
+            .background(Color.white)  // let the background stand out
+            .compositingGroup()       // ⭐️ composite all layers
+            .luminanceToAlpha()       // ⭐️ turn luminance into alpha (opacity)
+        return self.mask(inversed)
     }
 }

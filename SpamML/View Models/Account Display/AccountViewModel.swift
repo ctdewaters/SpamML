@@ -34,6 +34,14 @@ class AccountViewModel: ObservableObject, Identifiable {
             case .icloud : return UIImage(systemName: "icloud.circle.fill")!
             }
         }
+        
+        var cardBackground: UIImage {
+            switch self {
+            case .google : return UIImage(named: "googleCardBackground")!
+            case .imap   : return UIImage(named: "imapCardBackground")!
+            case .icloud : return UIImage(named: "icloudCardBackground")!
+            }
+        }
     }
     
     init(withGoogleAuthentication googleAuthentication: GTMAppAuthFetcherAuthorization) {
