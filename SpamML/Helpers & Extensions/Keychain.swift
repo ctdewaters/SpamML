@@ -105,25 +105,6 @@ public class Keychain {
 
 // MARK: - Account Keys
 extension Keychain {
-    /// This represents a key where user account information is stored in the keychain.
-    /// It is also supplied with the source of the account.
-    struct AccountKey: Identifiable, Codable {
-        let keyString: String
-        let sourceRaw: Int
-        
-        var source: Source { Source.init(rawValue: sourceRaw)! }
-        var id: String { keyString }
-        
-        init(key: String, source: Source) {
-            keyString = key
-            sourceRaw = source.rawValue
-        }
-        
-        enum Source: Int {
-            case google, imap
-        }
-    }
-    
     var accountKeys: [AccountKey] {
         set {
             let data = try? JSONEncoder().encode(newValue)

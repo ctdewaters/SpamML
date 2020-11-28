@@ -29,6 +29,7 @@
 		B88201AD2545948B0011B1E1 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88201AC2545948B0011B1E1 /* Keychain.swift */; };
 		B88201B72546215F0011B1E1 /* GoogleUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88201B62546215F0011B1E1 /* GoogleUserInfo.swift */; };
 		B88201EB25476E9C0011B1E1 /* IMAPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88201EA25476E9C0011B1E1 /* IMAPCredentials.swift */; };
+		B8DDCFB32572F69E0052486A /* AccountKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DDCFB22572F69E0052486A /* AccountKey.swift */; };
 		B8FA7E702544EE9200EAD17E /* MailCore2 in Frameworks */ = {isa = PBXBuildFile; productRef = B8FA7E6F2544EE9200EAD17E /* MailCore2 */; };
 		B8FA7E862544FD2D00EAD17E /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = B8FA7E852544FD2D00EAD17E /* Reachability */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,7 @@
 		B88201AC2545948B0011B1E1 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		B88201B62546215F0011B1E1 /* GoogleUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleUserInfo.swift; sourceTree = "<group>"; };
 		B88201EA25476E9C0011B1E1 /* IMAPCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMAPCredentials.swift; sourceTree = "<group>"; };
+		B8DDCFB22572F69E0052486A /* AccountKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountKey.swift; sourceTree = "<group>"; };
 		B8FA7E732544EEA000EAD17E /* SpamML.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SpamML.entitlements; sourceTree = "<group>"; };
 		B8FA7E7E2544F29A00EAD17E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -268,6 +270,7 @@
 		B88201B32546213F0011B1E1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B8DDCFB22572F69E0052486A /* AccountKey.swift */,
 				B88201E925476E9C0011B1E1 /* IMAP */,
 				B88201B4254621460011B1E1 /* Google APIs */,
 			);
@@ -421,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B815886625436102009195A0 /* ContentView.swift in Sources */,
+				B8DDCFB32572F69E0052486A /* AccountKey.swift in Sources */,
 				B88201EB25476E9C0011B1E1 /* IMAPCredentials.swift in Sources */,
 				B825B3F625584CAD000BF777 /* IMAPAccountAuthenticationView.swift in Sources */,
 				B88201AD2545948B0011B1E1 /* Keychain.swift in Sources */,

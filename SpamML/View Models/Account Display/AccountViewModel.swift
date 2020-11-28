@@ -44,6 +44,13 @@ class AccountViewModel: ObservableObject, Identifiable {
         }
     }
     
+    static func fromAccountKey(accountKey: AccountKey) -> AccountViewModel? {
+        if let googleAuth = accountKey.googleAuthentication { return AccountViewModel(withGoogleAuthentication: googleAuth) }
+        if let imapCredentials = accountKey.imapCredentials { return AccountViewModel(withIMAPCredentials: imapCredentials) }
+        
+        return nil
+    }
+    
     init(withGoogleAuthentication googleAuthentication: GTMAppAuthFetcherAuthorization) {
         emailAddress = googleAuthentication.userInfo?.email ?? "Invalid authorization"
         provider = .google

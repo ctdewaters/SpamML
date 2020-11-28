@@ -14,6 +14,21 @@ struct IMAPCredentials: Codable, Equatable {
     let port: UInt32
     let hostname: String
     
+    // MARK: - Initializers
+    init(username: String, password: String, port: UInt32, hostname: String) {
+        self.username = username
+        self.password = password
+        self.port = port
+        self.hostname = hostname
+    }
+
+    /// Initalizes an `IMAPCredentials` instance from the keychain for a given key.
+    /// If not present, `nil` is returned.
+    init?(fromKeychainForKey key: String) {
+        guard let credentials = Keychain.shared.loadIMAPCredentials(forKey: key) else { return nil }
+        self = credentials
+    }
+    
     // MARK: - MailCore Session Creation
     func createMailCoreSession() -> MCOIMAPSession {
         let session = MCOIMAPSession()

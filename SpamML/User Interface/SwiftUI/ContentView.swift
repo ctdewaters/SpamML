@@ -8,17 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
-    let keys = Keychain.shared.accountKeys
+    var keys: [AccountKey] { Keychain.shared.accountKeys }
+    
+    @State private var accountViewModels = [AccountViewModel]()
     
     var body: some View {
         VStack {
-            ForEach(keys) { key in
+            ForEach(accountViewModels) { accountViewModel in
                 HStack {
-                    Text(key.keyString)
-                    Text("\(key.sourceRaw)")
+                    Text(accountViewModel.emailAddress)
+                    Text("\(accountViewModel.id)")
                 }
             }
         }
+        .onAppear { self.accountViewModels = keys.accountViewModels }
     }
 }
 

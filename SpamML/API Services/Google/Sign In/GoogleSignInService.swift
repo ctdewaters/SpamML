@@ -90,7 +90,7 @@ final class GoogleSignInService: NSObject {
     private func save(authorization: GTMAppAuthFetcherAuthorization?) {
         guard let auth = authorization, let key = auth.userID else { return }
         
-        let accountKey = Keychain.AccountKey(key: key, source: .google)
+        let accountKey = AccountKey(key: key, source: .google)
         Keychain.shared.accountKeys.append(accountKey)
         GTMAppAuthFetcherAuthorization.save(auth, toKeychainForName: key)
     }
