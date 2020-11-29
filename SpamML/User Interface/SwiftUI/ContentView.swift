@@ -8,25 +8,49 @@
 import SwiftUI
 
 struct ContentView: View {
-    var keys: [AccountKey] { Keychain.shared.accountKeys }
-    
-    @State private var accountViewModels = [AccountViewModel]()
+    @State var accountViewModels = [AccountViewModel]()
+    @State var currentPage = 0
+    @State var showingAddAccountModal = false
     
     var body: some View {
-        VStack {
-            ForEach(accountViewModels) { accountViewModel in
-                HStack {
-                    Text(accountViewModel.emailAddress)
-                    Text("\(accountViewModel.id)")
-                }
+        NavigationView {
+            VStack {
+                PageView(accountViewModels: accountViewModels)
+                Spacer()
             }
+            .navigationBarTitle("SpamML")
+            .navigationBarItems(trailing:
+                Button("Add Account") { self.showingAddAccountModal = true }
+            )
         }
-        .onAppear { self.accountViewModels = keys.accountViewModels }
+        .sheet(isPresented: $showingAddAccountModal, content: {
+            LoginView()
+        })
     }
 }
 
+private struct PageView: View {
+    let accountViewModels: [AccountViewModel]
+    
+    var body: some View {
+        TabView {
+            ForEach(accountViewModels) { account in
+                AccountCard(accountViewModel: account)
+                    .frame(height: 500)
+            }
+        }
+        .onAppear {
+            UIScrollView.appearance().alwaysBounceVertical = false
+        }
+        .frame(width: UIScreen.main.bounds.width, height: 625)
+        .tabViewStyle(PageTabViewStyle())
+        .accentColor(.blue)
+    }
+}
+
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(accountViewModels: [.test_iCloud, .test_imap])
     }
 }

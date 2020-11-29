@@ -11,6 +11,10 @@ import SwiftUI
 struct SpamMLApp: App {
     init() {
         GoogleSignInService.shared = GoogleSignInService()
+        
+        UIPageControl.appearance().pageIndicatorTintColor = .tertiaryLabel
+        UIPageControl.appearance().currentPageIndicatorTintColor = .label
+        UIPageControl.appearance().backgroundStyle = .automatic
     }
 
     var body: some Scene {
@@ -19,7 +23,7 @@ struct SpamMLApp: App {
                 LoginView()
             }
             else {
-                ContentView()
+                ContentView(accountViewModels: Keychain.shared.accountKeys.accountViewModels)
             }
         }
     }
