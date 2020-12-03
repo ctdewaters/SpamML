@@ -14,6 +14,9 @@ class AccountViewModel: ObservableObject, Identifiable {
     
     var id: String = UUID().uuidString
     
+    var imapCredentials: IMAPCredentials?
+    var googleAuth: GTMAppAuthFetcherAuthorization?
+    
     @Published var flaggedEmails = [EmailViewModel]()
     
     enum Provider {
@@ -52,11 +55,13 @@ class AccountViewModel: ObservableObject, Identifiable {
     }
     
     init(withGoogleAuthentication googleAuthentication: GTMAppAuthFetcherAuthorization) {
+        googleAuth = googleAuthentication
         emailAddress = googleAuthentication.userInfo?.email ?? "Invalid authorization"
         provider = .google
     }
     
     init(withIMAPCredentials imapCredentials: IMAPCredentials) {
+        self.imapCredentials = imapCredentials
         emailAddress = imapCredentials.username
         
         if imapCredentials.hostname == "imap.mail.me.com" {

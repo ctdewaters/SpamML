@@ -81,6 +81,9 @@ struct AccountCard: View {
         )
         .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
         .shadow(color: Color(UIColor.darkGray.withAlphaComponent(0.45)), radius: 10, x: 0, y: 5)
+        .onAppear {
+            accountViewModel.updateFilteredEmails()
+        }
     }
 }
 

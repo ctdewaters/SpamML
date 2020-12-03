@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MailCore
 
 struct EmailViewModel: Identifiable, Hashable {
     let subject: String
@@ -28,5 +29,11 @@ struct EmailViewModel: Identifiable, Hashable {
     
     var timestampString: String {
         EmailViewModel.timestampFormatter.string(from: timestamp)
+    }
+}
+
+extension MCOIMAPMessage {
+    var emailViewModel: EmailViewModel {
+        EmailViewModel(subject: header.subject, bodyPreview: "This is the body preview", body: nil, timestamp: Date())
     }
 }
