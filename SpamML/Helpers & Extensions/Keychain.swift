@@ -48,7 +48,6 @@ public class Keychain {
         return result
     }
     
-    
     /// Saves a string to the keychain, with a given key.
     /// - Parameter string: The string to save in the keychain.
     /// - Parameter key: The key, with which to save the string in the keychain.

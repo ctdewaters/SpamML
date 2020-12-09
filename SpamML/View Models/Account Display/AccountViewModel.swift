@@ -17,7 +17,13 @@ class AccountViewModel: ObservableObject, Identifiable {
     var imapCredentials: IMAPCredentials?
     var googleAuth: GTMAppAuthFetcherAuthorization?
     
-    @Published var flaggedEmails = [EmailViewModel]()
+    @Published var flaggedEmails = [EmailViewModel]() {
+        didSet {
+            isRefreshingEmails = false
+        }
+    }
+    
+    @Published var isRefreshingEmails = false
     
     enum Provider {
         case google, imap, icloud

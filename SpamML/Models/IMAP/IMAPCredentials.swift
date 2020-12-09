@@ -14,6 +14,17 @@ struct IMAPCredentials: Codable, Equatable {
     let port: UInt32
     let hostname: String
     
+    var identifier: String { username + hostname }
+    
+    var lastUIDFetched: UInt64 {
+        set {
+            SpamMLUserDefaults.lastRetrievedUIDs[identifier] = newValue
+        }
+        get {
+            SpamMLUserDefaults.lastRetrievedUIDs[identifier] ?? 1
+        }
+    }
+    
     // MARK: - Initializers
     init(username: String, password: String, port: UInt32, hostname: String) {
         self.username = username

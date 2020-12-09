@@ -10,15 +10,20 @@ import CoreML
 
 extension AccountViewModel {
     func updateFilteredEmails() {
-        guard let imapSession = imapCredentials?.createMailCoreSession() else { return }
+        guard let imapSession = imapCredentials?.createMailCoreSession(), !isRefreshingEmails else { return }
+        
+        isRefreshingEmails = true
+        
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            self?.retrieveUnreadEmails(withSession: imapSession) { [weak self] messages in
+            let uids = MCOIndexSet(range: MCORange(location: 1, length: .max))
+            self?.retrieveUnreadEmails(withSession: imapSession, uids: uids) { [weak self] messages in
                 let spamEmails = self?.spamFilter(imapMessages: messages) ?? []
                 self?.flaggedEmails = spamEmails.map { $0.emailViewModel }
             }
         }
     }
     
+    /// Returns the messages marked as spam by the machine learning model from a given array of `MCOIMAPMessage` instances.
     private func spamFilter(imapMessages: [MCOIMAPMessage]) -> [MCOIMAPMessage] {
         guard let emailSpamClassifier = try? EmailSpamClassifier(configuration: MLModelConfiguration()) else { return [] }
         
@@ -32,21 +37,32 @@ extension AccountViewModel {
             
             if output.label == "spam" {
                 let message = imapMessages[i]
-                spamMessages.append(message)
+                
+                // Insert at the beginning to re-sort from newest to oldest.
+                spamMessages.insert(message, at: 0)
             }
         }
         
         return spamMessages
     }
     
-    private func retrieveUnreadEmails(withSession session: MCOIMAPSession, withCompletion completion: @escaping ([MCOIMAPMessage])->Void) {
-        let requestKind: MCOIMAPMessagesRequestKind = [.flags, .fullHeaders, .structure]
-        let uids = MCOIndexSet(range: MCORange(location: 1, length: .max))
+    /// Fetches all unread emails from the given `MCOIMAPSession` in a given range.
+    private func retrieveUnreadEmails(withSession session: MCOIMAPSession,
+                                      uids: MCOIndexSet? = MCOIndexSet(range: MCORange(location: 1, length: .max)),
+                                      withCompletion completion: @escaping ([MCOIMAPMessage])->Void) {
+        
+        let requestKind: MCOIMAPMessagesRequestKind = [.flags, .fullHeaders]
         let fetchOperation = session.fetchMessagesOperation(withFolder: "INBOX", requestKind: requestKind, uids: uids)
         
-        fetchOperation?.start { error, messages, indexSet in
+        // Fetch the messages in the UID set.
+        fetchOperation?.start { [weak self] error, messages, indexSet in
             guard error == nil, let messages = messages else { completion([]); print(error?.localizedDescription ?? ""); return }
             let unread = messages
+            
+            // Update the last fetched UID for the IMAP Configuration
+            let lastUID = UInt64(messages.last?.uid ?? 1)
+            self?.imapCredentials?.lastUIDFetched = lastUID
+            
             completion(unread)
         }
     }

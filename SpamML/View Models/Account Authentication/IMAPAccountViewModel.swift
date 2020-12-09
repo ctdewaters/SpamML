@@ -37,7 +37,7 @@ class IMAPAccountViewModel: ObservableObject {
             
             // Save to keychain if successful.
             if successful {
-                Keychain.shared.save(imapCredentials: imapCredentials, forKey: imapCredentials.username)
+                Keychain.shared.save(imapCredentials: imapCredentials, forKey: imapCredentials.identifier)
                 self?.onAuthenticatedAccount()
             }
         }

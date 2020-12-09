@@ -37,39 +37,50 @@ struct AccountCard: View {
                 }
                 .padding([.horizontal, .top])
 
-                // Filtered Emails
-                ScrollView([]) {
-                    LazyVStack {
-                        ForEach(accountViewModel.flaggedEmails) { email in
-                            EmailRow(emailViewModel: email)
-                                .frame(maxWidth: .infinity, alignment: .topLeading)
-                            Divider()
-                                .background(Color(UIColor.white.withAlphaComponent(0.8)))
-                                .padding(.leading, 16)
-                        }
-                    }
-                    .padding(EdgeInsets(top: 20, leading: 0, bottom: 60, trailing: 0))
+                if accountViewModel.isRefreshingEmails {
+                    // Progress View
+                    Spacer()
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    Spacer()
                 }
-                .mask(LinearGradient(gradient: Gradient(stops: [
-                    .init(color: .clear, location: 0),
-                    .init(color: .black, location: 0.05),
-                    .init(color: .black, location: 0.8),
-                    .init(color: .clear, location: 1)
-                ]), startPoint: .top, endPoint: .bottom))
+                else {
+                    // Filtered Emails
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(accountViewModel.flaggedEmails) { email in
+                                EmailRow(emailViewModel: email)
+                                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                                Divider()
+                                    .background(Color(UIColor.white.withAlphaComponent(0.8)))
+                                    .padding(.leading, 16)
+                            }
+                        }
+                        .padding(EdgeInsets(top: 20, leading: 0, bottom: 60, trailing: 0))
+                    }
+                    .mask(LinearGradient(gradient: Gradient(stops: [
+                        .init(color: .clear, location: 0),
+                        .init(color: .black, location: 0.05),
+                        .init(color: .black, location: 0.8),
+                        .init(color: .clear, location: 1)
+                    ]), startPoint: .top, endPoint: .bottom))
+                }
             }
             
-            // Delete emails button
-            Button(action: {}, label: {
-                HStack {
-                    Image(systemName: "trash.fill")
-                    Text("Delete All Spam")
-                }
-            })
-            .font(.headline)
-            .foregroundColor(.red)
-            .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
-            .background(Color.white)
-            .cornerRadius(50)
+            if !accountViewModel.isRefreshingEmails {
+                // Delete emails button
+                Button(action: {}, label: {
+                    HStack {
+                        Image(systemName: "trash.fill")
+                        Text("Delete All Spam")
+                    }
+                })
+                .font(.headline)
+                .foregroundColor(.red)
+                .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                .background(Color.white)
+                .cornerRadius(50)
+            }
 
         }
         .padding(.bottom, 16)

@@ -18,4 +18,13 @@ struct SpamMLUserDefaults {
             standard.bool(forKey: "onboardingComplete")
         }
     }
+    
+    static var lastRetrievedUIDs: [String : UInt64] {
+        set {
+            standard.set(newValue, forKey: "lastRetrievedUIDs")
+        }
+        get {
+            standard.object(forKey: "lastRetrievedUIDs") as? [String : UInt64] ?? [:]
+        }
+    }
 }
