@@ -23,10 +23,11 @@
 		B81588F02544E8E3009195A0 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B81588ED2544E8E3009195A0 /* LoginViewController.xib */; };
 		B825B3F625584CAD000BF777 /* IMAPAccountAuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825B3F525584CAD000BF777 /* IMAPAccountAuthenticationView.swift */; };
 		B825B3FB25584CC2000BF777 /* IMAPAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B825B3FA25584CC2000BF777 /* IMAPAccountViewModel.swift */; };
-		B827B0A72578823D00369F4E /* AccountViewModel+IMAPFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = B827B0A62578823D00369F4E /* AccountViewModel+IMAPFiltering.swift */; };
 		B869010A255F5833006E899E /* SpamMLUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8690109255F5833006E899E /* SpamMLUserDefaults.swift */; };
-		B869010D255F5C92006E899E /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B869010C255F5C92006E899E /* EmailViewModel.swift */; };
+		B869010D255F5C92006E899E /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = B869010C255F5C92006E899E /* Email.swift */; };
 		B8690110255F5E10006E899E /* EmailRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B869010F255F5E10006E899E /* EmailRow.swift */; };
+		B871DF2F258564380080914D /* IMAPController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B871DF2E258564380080914D /* IMAPController.swift */; };
+		B871DF3A258569580080914D /* MLFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B871DF39258569580080914D /* MLFilterController.swift */; };
 		B88201AD2545948B0011B1E1 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88201AC2545948B0011B1E1 /* Keychain.swift */; };
 		B88201B72546215F0011B1E1 /* GoogleUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88201B62546215F0011B1E1 /* GoogleUserInfo.swift */; };
 		B88201EB25476E9C0011B1E1 /* IMAPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88201EA25476E9C0011B1E1 /* IMAPCredentials.swift */; };
@@ -59,10 +60,11 @@
 		B81588ED2544E8E3009195A0 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		B825B3F525584CAD000BF777 /* IMAPAccountAuthenticationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMAPAccountAuthenticationView.swift; sourceTree = "<group>"; };
 		B825B3FA25584CC2000BF777 /* IMAPAccountViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMAPAccountViewModel.swift; sourceTree = "<group>"; };
-		B827B0A62578823D00369F4E /* AccountViewModel+IMAPFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountViewModel+IMAPFiltering.swift"; sourceTree = "<group>"; };
 		B8690109255F5833006E899E /* SpamMLUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamMLUserDefaults.swift; sourceTree = "<group>"; };
-		B869010C255F5C92006E899E /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
+		B869010C255F5C92006E899E /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		B869010F255F5E10006E899E /* EmailRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRow.swift; sourceTree = "<group>"; };
+		B871DF2E258564380080914D /* IMAPController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMAPController.swift; sourceTree = "<group>"; };
+		B871DF39258569580080914D /* MLFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLFilterController.swift; sourceTree = "<group>"; };
 		B88201AC2545948B0011B1E1 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		B88201B62546215F0011B1E1 /* GoogleUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleUserInfo.swift; sourceTree = "<group>"; };
 		B88201EA25476E9C0011B1E1 /* IMAPCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMAPCredentials.swift; sourceTree = "<group>"; };
@@ -110,8 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				B80C32E22558A29D002E8730 /* AccountViewModel.swift */,
-				B827B0A62578823D00369F4E /* AccountViewModel+IMAPFiltering.swift */,
-				B869010C255F5C92006E899E /* EmailViewModel.swift */,
 			);
 			path = "Account Display";
 			sourceTree = "<group>";
@@ -132,6 +132,7 @@
 				B815883B25436101009195A0 /* SpamMLApp.swift */,
 				B81588CD2544E490009195A0 /* User Interface */,
 				B825B3F825584CC2000BF777 /* View Models */,
+				B871DF2D258564290080914D /* Controllers */,
 				B88201B32546213F0011B1E1 /* Models */,
 				B88201AF254620AA0011B1E1 /* API Services */,
 				B88201AB254594760011B1E1 /* Helpers & Extensions */,
@@ -245,6 +246,15 @@
 			path = "Account Card";
 			sourceTree = "<group>";
 		};
+		B871DF2D258564290080914D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B871DF2E258564380080914D /* IMAPController.swift */,
+				B871DF39258569580080914D /* MLFilterController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		B88201AB254594760011B1E1 /* Helpers & Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				B8DDCFB22572F69E0052486A /* AccountKey.swift */,
+				B869010C255F5C92006E899E /* Email.swift */,
 				B88201E925476E9C0011B1E1 /* IMAP */,
 				B88201B4254621460011B1E1 /* Google APIs */,
 			);
@@ -436,9 +447,10 @@
 				B8690110255F5E10006E899E /* EmailRow.swift in Sources */,
 				B81588EE2544E8E3009195A0 /* LoginViewController.swift in Sources */,
 				B815886425436102009195A0 /* SpamMLApp.swift in Sources */,
-				B827B0A72578823D00369F4E /* AccountViewModel+IMAPFiltering.swift in Sources */,
 				B80C32DF2558A268002E8730 /* AccountCard.swift in Sources */,
-				B869010D255F5C92006E899E /* EmailViewModel.swift in Sources */,
+				B871DF2F258564380080914D /* IMAPController.swift in Sources */,
+				B869010D255F5C92006E899E /* Email.swift in Sources */,
+				B871DF3A258569580080914D /* MLFilterController.swift in Sources */,
 				B80C32D9255869E2002E8730 /* EmailSpamClassifier.mlmodel in Sources */,
 				B825B3FB25584CC2000BF777 /* IMAPAccountViewModel.swift in Sources */,
 				B80C32E32558A29D002E8730 /* AccountViewModel.swift in Sources */,

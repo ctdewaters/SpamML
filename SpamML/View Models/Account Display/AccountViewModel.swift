@@ -5,25 +5,32 @@
 //  Created by Collin DeWaters on 11/8/20.
 //
 
+import MailCore
 import GTMAppAuth
 import SwiftUI
 
+/// A view model displayed in an `AccountCard` instance.
 class AccountViewModel: ObservableObject, Identifiable {
     let emailAddress: String
     let provider: Provider
     
     var id: String = UUID().uuidString
     
-    var imapCredentials: IMAPCredentials?
-    var googleAuth: GTMAppAuthFetcherAuthorization?
+    private(set) var imapCredentials: IMAPCredentials?
+    private(set) var googleAuth: GTMAppAuthFetcherAuthorization?
     
-    @Published var flaggedEmails = [EmailViewModel]() {
+    @Published var flaggedEmails = [Email]() {
         didSet {
             isRefreshingEmails = false
         }
     }
     
     @Published var isRefreshingEmails = false
+    
+    private lazy var imapController: IMAPController? = {
+        guard let imapCredentials = imapCredentials else { return nil }
+        return IMAPController(withIMAPCredentials: imapCredentials)
+    }()
     
     enum Provider {
         case google, imap, icloud
@@ -76,27 +83,37 @@ class AccountViewModel: ObservableObject, Identifiable {
         else {
             provider = .imap
         }
-     }
+    }
+    
+    // MARK: - Filtering
+    func filterLatestUnread() {
+        guard provider == .icloud else { return }
+        imapController?.retrieveIMAPFolderInfo { folderInfo in
+            print(folderInfo?.uidNext ?? -1)
+            print(folderInfo?.uidValidity ?? -1)
+            print(folderInfo?.firstUnseenUid ?? -1)
+        }
+    }
 
     // MARK: - Test View Models
     // Test emails for the preview
-    private static let emailViewModel1 = EmailViewModel(subject: "Buy the new iPhone 12 Pro Max!", bodyPreview: "Available now, starting at $1099! Order yours today before it's too late! This offer will only last for a short period of time!", body: nil, timestamp: Date())
-    private static let emailViewModel2 = EmailViewModel(subject: "Hello hi!", bodyPreview: "This is a test Email. Do not click on it!", body: nil, timestamp: Date())
-    private static let emailViewModel3 = EmailViewModel(subject: "Hello sadf!", bodyPreview: "This is a test Email. Do not click on it!", body: nil, timestamp: Date())
-    private static let emailViewModel4 = EmailViewModel(subject: "Hello asddas!", bodyPreview: "This is a test Email. Do not click on it!", body: nil, timestamp: Date())
-    private static let emailViewModel5 = EmailViewModel(subject: "Hello adasdvasdvads!", bodyPreview: "This is a test Email. Do not click on it!", body: nil, timestamp: Date())
-    private static let emailViewModel6 = EmailViewModel(subject: "Hello asvdwavs!", bodyPreview: "This is a test Email. Do not click on it!", body: nil, timestamp: Date())
-    private static let emailViewModel7 = EmailViewModel(subject: "Hello avsdvasdv!", bodyPreview: "This is a test Email. Do not click on it!", body: nil, timestamp: Date())
+    private static let email1 = Email(subject: "Buy the new iPhone 12 Pro Max!", body: "Available now, starting at $1099! Order yours today before it's too late! This offer will only last for a short period of time!", timestamp: Date())
+    private static let email2 = Email(subject: "Hello hi!", body: "This is a test Email. Do not click on it!", timestamp: Date())
+    private static let email3 = Email(subject: "Hello sadf!", body: "This is a test Email. Do not click on it!", timestamp: Date())
+    private static let email4 = Email(subject: "Hello asddas!", body: "This is a test Email. Do not click on it!", timestamp: Date())
+    private static let email5 = Email(subject: "Hello adasdvasdvads!", body: "This is a test Email. Do not click on it!", timestamp: Date())
+    private static let email6 = Email(subject: "Hello asvdwavs!", body: "This is a test Email. Do not click on it!", timestamp: Date())
+    private static let email7 = Email(subject: "Hello avsdvasdv!", body: "This is a test Email. Do not click on it!", timestamp: Date())
 
     static var test_iCloud: AccountViewModel {
         let accountViewModel = AccountViewModel(withIMAPCredentials: IMAPCredentials(username: "ctdewaters@icloud.com", password: "Password", port: 993, hostname: "imap.mail.me.com"))
-        accountViewModel.flaggedEmails = [emailViewModel1, emailViewModel2, emailViewModel3, emailViewModel4, emailViewModel5, emailViewModel6, emailViewModel7]
+        accountViewModel.flaggedEmails = [email1, email2, email3, email4, email5, email6, email7]
         return accountViewModel
     }
     
     static var test_imap: AccountViewModel {
         let accountViewModel = AccountViewModel(withIMAPCredentials: IMAPCredentials(username: "ctdewaters@collindewaters.com", password: "Password", port: 993, hostname: "imap.collindewaters.com"))
-        accountViewModel.flaggedEmails = [emailViewModel1, emailViewModel2, emailViewModel3, emailViewModel4, emailViewModel5, emailViewModel6, emailViewModel7]
+        accountViewModel.flaggedEmails = [email1, email2, email3, email4, email5, email6, email7]
         return accountViewModel
     }
 }

@@ -11,6 +11,13 @@ import SwiftUI
 struct AccountCard: View {
     @ObservedObject var accountViewModel: AccountViewModel
     
+    init(accountViewModel: AccountViewModel) {
+        self.accountViewModel = accountViewModel
+        
+        /// Update the latest unread when creating this Account Card.
+        accountViewModel.filterLatestUnread()
+    }
+    
     var body: some View {
         
         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
@@ -49,7 +56,7 @@ struct AccountCard: View {
                     ScrollView {
                         LazyVStack {
                             ForEach(accountViewModel.flaggedEmails) { email in
-                                EmailRow(emailViewModel: email)
+                                EmailRow(email: email)
                                     .frame(maxWidth: .infinity, alignment: .topLeading)
                                 Divider()
                                     .background(Color(UIColor.white.withAlphaComponent(0.8)))
@@ -92,9 +99,6 @@ struct AccountCard: View {
         )
         .clipShape(RoundedRectangle(cornerRadius: 28, style: .continuous))
         .shadow(color: Color(UIColor.darkGray.withAlphaComponent(0.45)), radius: 10, x: 0, y: 5)
-        .onAppear {
-            accountViewModel.updateFilteredEmails()
-        }
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  EmailViewModel.swift
+//  Email.swift
 //  SpamML
 //
 //  Created by Collin DeWaters on 11/13/20.
@@ -8,10 +8,10 @@
 import SwiftUI
 import MailCore
 
-struct EmailViewModel: Identifiable, Hashable {
+/// A global representaiton of an email message, which is created with `GmailController` and `IMAPController`, and can be used with the `MLFilterController`.
+struct Email: Identifiable, Hashable {
     let subject: String
-    let bodyPreview: String
-    let body: Data?
+    let body: String
     let timestamp: Date
     
     let id = UUID().uuidString
@@ -28,12 +28,12 @@ struct EmailViewModel: Identifiable, Hashable {
     }()
     
     var timestampString: String {
-        EmailViewModel.timestampFormatter.string(from: timestamp)
+        Email.timestampFormatter.string(from: timestamp)
     }
 }
 
 extension MCOIMAPMessage {
-    var emailViewModel: EmailViewModel {
-        EmailViewModel(subject: header.subject, bodyPreview: "This is the body preview", body: nil, timestamp: Date())
+    var email: Email {
+        Email(subject: header.subject, body: "This is the body preview", timestamp: Date())
     }
 }
