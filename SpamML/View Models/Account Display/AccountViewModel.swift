@@ -32,6 +32,8 @@ class AccountViewModel: ObservableObject, Identifiable {
         return IMAPController(withIMAPCredentials: imapCredentials)
     }()
     
+    private lazy var filterController: MLFilterController = { MLFilterController() }()
+    
     enum Provider {
         case google, imap, icloud
         
@@ -88,22 +90,44 @@ class AccountViewModel: ObservableObject, Identifiable {
     // MARK: - Filtering
     func filterLatestUnread() {
         guard provider == .icloud else { return }
-        imapController?.retrieveIMAPFolderInfo { folderInfo in
-            print(folderInfo?.uidNext ?? -1)
-            print(folderInfo?.uidValidity ?? -1)
-            print(folderInfo?.firstUnseenUid ?? -1)
+
+        isRefreshingEmails = true
+        
+        imapController?.retrieveIMAPFolderInfo { [weak self] folderInfo in
+            guard let firstUnseenUID = folderInfo?.firstUnseenUid,
+                  firstUnseenUID > 0,
+                  let messageCount = folderInfo?.messageCount else { self?.isRefreshingEmails = false; return }
+            
+            let length = UInt64(messageCount) - UInt64(firstUnseenUID)
+            let range = MCORange(location: UInt64(firstUnseenUID), length: length)
+                                    
+            self?.imapController?.retrieveMessages(inUIDRange: range) { [weak self] messages in
+                
+                //Filter the messages.
+                let quickFilterSpamMessages = self?.filterController.quickFilter(imapMessages: messages) ?? []
+                            
+                // Render the full messages for the spam
+                self?.imapController?.renderEmailModels(forMessages: quickFilterSpamMessages) { [weak self] emails in
+                    // Run a complete filter on each triggered message.
+                    let spamEmails = self?.filterController.filter(emailMessages: emails) ?? []
+                    
+                    self?.isRefreshingEmails = false
+                    self?.flaggedEmails = spamEmails
+                    
+                }
+            }
         }
     }
 
     // MARK: - Test View Models
     // Test emails for the preview
-    private static let email1 = Email(subject: "Buy the new iPhone 12 Pro Max!", body: "Available now, starting at $1099! Order yours today before it's too late! This offer will only last for a short period of time!", timestamp: Date())
-    private static let email2 = Email(subject: "Hello hi!", body: "This is a test Email. Do not click on it!", timestamp: Date())
-    private static let email3 = Email(subject: "Hello sadf!", body: "This is a test Email. Do not click on it!", timestamp: Date())
-    private static let email4 = Email(subject: "Hello asddas!", body: "This is a test Email. Do not click on it!", timestamp: Date())
-    private static let email5 = Email(subject: "Hello adasdvasdvads!", body: "This is a test Email. Do not click on it!", timestamp: Date())
-    private static let email6 = Email(subject: "Hello asvdwavs!", body: "This is a test Email. Do not click on it!", timestamp: Date())
-    private static let email7 = Email(subject: "Hello avsdvasdv!", body: "This is a test Email. Do not click on it!", timestamp: Date())
+    private static let email1 = Email.testInstance(subject: "Buy the new iPhone 12 Pro Max!", body: "Available now, starting at $1099! Order yours today before it's too late! This offer will only last for a short period of time!", id: "1")
+    private static let email2 = Email.testInstance(subject: "Hello hi!", body: "This is a test Email. Do not click on it!", id: "2")
+    private static let email3 = Email.testInstance(subject: "Hello sadf!", body: "This is a test Email. Do not click on it!", id: "3")
+    private static let email4 = Email.testInstance(subject: "Hello asddas!", body: "This is a test Email. Do not click on it!", id: "4")
+    private static let email5 = Email.testInstance(subject: "Hello adasdvasdvads!", body: "This is a test Email. Do not click on it!", id: "5")
+    private static let email6 = Email.testInstance(subject: "Hello asvdwavs!", body: "This is a test Email. Do not click on it!", id: "6")
+    private static let email7 = Email.testInstance(subject: "Hello avsdvasdv!", body: "This is a test Email. Do not click on it!", id: "7")
 
     static var test_iCloud: AccountViewModel {
         let accountViewModel = AccountViewModel(withIMAPCredentials: IMAPCredentials(username: "ctdewaters@icloud.com", password: "Password", port: 993, hostname: "imap.mail.me.com"))

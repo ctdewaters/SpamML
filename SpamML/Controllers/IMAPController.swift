@@ -11,9 +11,7 @@ import CoreML
 /// Provides retrieval of IMAP messages through MailiCore.
 class IMAPController {
     let credentials: IMAPCredentials
-    
-    let filterController: MLFilterController = { MLFilterController() }()
-    
+        
     private(set) lazy var session: MCOIMAPSession? = {
         self.credentials.createMailCoreSession()
     }()
@@ -23,6 +21,7 @@ class IMAPController {
     typealias MessageFetchCompletion = ([MCOIMAPMessage]) -> Void
     typealias PlainTextBodyCompletion = (String) -> Void
     typealias EmailModelRenderingCompletion = (Email) -> Void
+    typealias EmailModelsRenderingCompletion = ([Email]) -> Void
     
     private let dispatchQueue = DispatchQueue(label: "IMAPController", qos: .userInitiated, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil)
     
@@ -43,14 +42,11 @@ class IMAPController {
     }
     
     // MARK: - General Retrieval
-    func retrieveMessageHeaders(folder: String = "INBOX", inUIDRange range: MCORange, withCompletion completion: @escaping MessageFetchCompletion) {
-        retrieveMessages(folder: folder, requestKind: [.fullHeaders, .flags], inUIDRange: range, withCompletion: completion)
-    }
-    
-    func retrieveMessages(folder: String = "INBOX", requestKind: MCOIMAPMessagesRequestKind, inUIDRange range: MCORange, withCompletion completion: @escaping MessageFetchCompletion) {
+    func retrieveMessages(folder: String = "INBOX", requestKind: MCOIMAPMessagesRequestKind = [.fullHeaders, .flags, .structure], inUIDRange range: MCORange, withCompletion completion: @escaping MessageFetchCompletion) {
         dispatchQueue.async { [weak self] in
             let uids = MCOIndexSet(range: range)
-            guard let fetchOperation = self?.session?.fetchMessagesOperation(withFolder: "INBOX", requestKind: requestKind, uids: uids) else { completion([]); return }
+            
+            guard let fetchOperation = self?.session?.fetchMessagesByNumberOperation(withFolder: folder, requestKind: requestKind, numbers: uids) else { completion([]); return }
             
             // Fetch the messages in the UID set.
             fetchOperation.start { error, messages, _ in
@@ -61,16 +57,47 @@ class IMAPController {
     }
     
     // MARK: - Email Rendering
+    func renderEmailModels(forMessages messages: [MCOIMAPMessage], inFolder folder: String = "INBOX", withCompletion completion: @escaping EmailModelsRenderingCompletion) {
+        guard messages.count > 0 else { completion([]); return }
+        
+        var emails = [Email]()
+        
+        func runCompletionIfNeeded() {
+            guard emails.count == messages.count else { return }
+            
+            // Sort emails by UID
+            emails = emails.sorted { $0.uid > $1.uid }
+            
+            completion(emails)
+        }
+        
+        // Render each of the messages to an `Email` model
+        messages.forEach { [weak self] message in
+            self?.renderEmailModel(withMessage: message) { email in
+                emails.append(email)
+                runCompletionIfNeeded()
+            }
+        }
+    }
+    
     private func renderEmailModel(withMessage message: MCOIMAPMessage, inFolder folder: String = "INBOX", withCompletion completion: @escaping EmailModelRenderingCompletion) {
         renderPlainTextBody(forMessage: message, inFolder: folder) { body in
-            let email = Email(subject: message.header.subject, body: body, timestamp: message.header.date)
+            
+            // Create `Contact` instances
+            let from = message.header.from.contact
+            let to = message.header.toAddresses.map { $0.contact }
+            let cc = message.header.ccAddresses.map { $0.contact }
+            let bcc = message.header.bccAddresses.map { $0.contact }
+            
+            let email = Email(subject: message.header.subject, body: body, timestamp: message.header.date, id: "\(message.uid)", from: from, to: to, cc: cc, bcc: bcc)
             completion(email)
         }
     }
     
     private func renderPlainTextBody(forMessage message: MCOIMAPMessage, inFolder folder: String = "INBOX", withCompletion completion: @escaping PlainTextBodyCompletion) {
         dispatchQueue.async { [weak self] in
-            guard let renderingOperation = self?.session?.plainTextBodyRenderingOperation(with: message, folder: folder, stripWhitespace: true) else { completion(""); return }
+            
+            guard let renderingOperation = self?.session?.plainTextBodyRenderingOperation(with: message, folder: folder) else { completion(""); return }
             
             renderingOperation.start { plainTextBody, error in
                 guard error == nil, let body = plainTextBody else { completion(""); return }
@@ -80,4 +107,10 @@ class IMAPController {
     }
     
     // MARK: - CoreML Filtering
+}
+
+private extension MCOMessageHeader {
+    var toAddresses:  [MCOAddress] { to as? [MCOAddress] ?? [] }
+    var ccAddresses:  [MCOAddress] { cc as? [MCOAddress] ?? [] }
+    var bccAddresses: [MCOAddress] { cc as? [MCOAddress] ?? [] }
 }
